@@ -56,7 +56,7 @@ public class MainMenu {
 
         menuPanel1.add(Box.createVerticalGlue());
 
-        menuPanel1.setLayout(new BoxLayout(menuPanel1,BoxLayout.Y_AXIS));
+        menuPanel1.setLayout(new BoxLayout(menuPanel1, BoxLayout.Y_AXIS));
         menuPanel1.add(menuTitulo1);
         menuPanel1.add(Box.createVerticalStrut(50));
         menuPanel1.add(partidaNueva);
@@ -71,7 +71,7 @@ public class MainMenu {
 
         menuPanel1.add(Box.createVerticalGlue());
 
-        menu.add(menuPanel1,BorderLayout.CENTER);
+        menu.add(menuPanel1, BorderLayout.CENTER);
         menu.setLocationRelativeTo(null);
         menu.setVisible(true);
 
