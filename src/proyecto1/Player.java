@@ -7,13 +7,15 @@ public class Player {
     public int points;
     public int partidasHeroes;
     public int partidasVillanos;
+    public boolean login;
 
-    public Player(String username, String password, int points, int partidasHeroes, int partidasVillanos){
+    public Player(String username, String password, int points, int partidasHeroes, int partidasVillanos, boolean login) {
         this.username = username;
         this.password = password;
         this.points = 0;
         this.partidasHeroes = 0;
         this.partidasVillanos = 0;
+        this.login = false;
     }
 
 }

@@ -2,9 +2,11 @@ package proyecto1;
 
 import javax.swing.*;
 import java.awt.*;
+import Exceptions.*;
 
 public class MainMenu {
 
+    //GUI
     JFrame menu = new JFrame("Menu Principal");
 
     JLabel menuTitulo1 = new JLabel("Marvel Heroes: Stratego");
@@ -18,6 +20,7 @@ public class MainMenu {
     JButton exit = new JButton("Salir");
 
     public MainMenu() {
+        //GUI
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu.setSize(1600,900);
         menu.setResizable(false);
@@ -73,12 +76,14 @@ public class MainMenu {
 
         menu.add(menuPanel1, BorderLayout.CENTER);
         menu.setLocationRelativeTo(null);
-        menu.setVisible(true);
 
+        //Botones
         exit.addActionListener(e ->{
             System.exit(0);
         });
 
+
+        menu.setVisible(true);
     }
 
 
