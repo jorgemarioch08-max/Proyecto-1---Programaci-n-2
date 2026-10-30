@@ -105,11 +105,10 @@ public class CrearCuenta {
         crearAcc.addActionListener(e -> {
             try {
                 admin.createPlayer(user.getText(), new String(pass.getPassword()));
+                this.crearCuenta.dispose();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             }
-
-            this.crearCuenta.dispose();
         });
 
 

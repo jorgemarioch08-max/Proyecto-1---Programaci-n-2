@@ -16,26 +16,21 @@ public class PlayerManager {
         this.players = new Player[playerLimit];
     }
 
-    public void createPlayer(String nombre, String contra) {
+    public void createPlayer(String nombre, String contra) throws InvalidPasswordException, InvalidUsernameException {
         //Verificar la contraseña
-        try {
-            if (contra.length() != 5 || contra.contains(" ")) {
-                throw new InvalidPasswordException();
-            }
-        } catch (InvalidPasswordException ex) {
-            JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        if (contra.length() != 5 || contra.contains(" ")) {
+            throw new InvalidPasswordException();
         }
         //Verificar el username
-        try {
-            if (nombre.trim().isEmpty()) {
-                throw new InvalidUsernameException();
-            }
-        } catch (InvalidUsernameException ex)  {
-            JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+        if (nombre.trim().isEmpty()) {
+            throw new InvalidUsernameException();
         }
 
-        for (int i=0; i<this.players.length || this.players[i] != null; i++) {
-            players[i] = new Player(nombre, contra, 0, 0, 0, false);
+        for (int i=0; i<this.players.length; i++) {
+            if (this.players[i] == null) {
+                players[i] = new Player(nombre.trim(), contra, 0, 0, 0, false);
+                break;
+            }
         }
     }
 
