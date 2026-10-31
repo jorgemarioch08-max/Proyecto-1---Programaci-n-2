@@ -62,4 +62,32 @@ public class PlayerManager {
         System.out.println("Find player");
     }
 
+
+    //Getters
+
+    public Player[] getPlayers() {
+        return players;
+    }
+
+    public int getPlayerLimit() {
+        return playerLimit;
+    }
+
+    public Player getActivePlayer() {
+        return activePlayer;
+    }
+
+    //Setters
+
+    public void setPlayers(Player[] players) {
+        this.players = players;
+    }
+
+    public void setPlayerLimit(int playerLimit) {
+        this.playerLimit = playerLimit;
+    }
+
+    public void setActivePlayer(Player activePlayer) {
+        this.activePlayer = activePlayer;
+    }
 }

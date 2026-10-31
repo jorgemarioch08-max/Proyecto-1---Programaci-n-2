@@ -7,6 +7,7 @@ public class Player {
     public int points;
     public int partidasHeroes;
     public int partidasVillanos;
+    public int partidasTotales;
     public boolean login;
 
     public Player(String username, String password, int points, int partidasHeroes, int partidasVillanos, boolean login) {
@@ -15,6 +16,7 @@ public class Player {
         this.points = 0;
         this.partidasHeroes = 0;
         this.partidasVillanos = 0;
+        this.partidasTotales = partidasHeroes + partidasVillanos;
         this.login = false;
     }
 

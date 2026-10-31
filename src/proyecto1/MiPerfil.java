@@ -9,20 +9,18 @@ public class MiPerfil extends JDialog {
     //Admin
     PlayerManager admin;
 
-    JDialog miPerfil = new JDialog();
-
     JPanel panel1 = new JPanel();
 
     JLabel lbl1 = new JLabel("Perfil");
     JLabel lbl2 = new JLabel("Nombre de usuario: ");
-    JLabel userNamme = new JLabel("Nombre de usuario: ");
+    JLabel userNamme = new JLabel();
     JLabel lbl3 = new JLabel("Sesión activa.");
     JLabel lbl4 = new JLabel("Estadisticas");
-    JLabel lbl5 = new JLabel("Partidas jugadas: ");
-    JLabel lbl6 = new JLabel("Partidas jugadas como héroe: ");
-    JLabel lbl7 = new JLabel("Partidas jugadas como villano: ");
+    JLabel lbl5 = new JLabel();
+    JLabel lbl6 = new JLabel();
+    JLabel lbl7 = new JLabel();
 
-    ImageIcon icon = new ImageIcon(getClass().getResource("src/Imagenes/perfil.png"));
+    ImageIcon icon = new ImageIcon("src/Imagenes/perfil.png");
 
     JButton cerrarSesion = new JButton("Cerrar sesion");
     JButton leaderboard = new JButton("Ver Leaderboard");
@@ -32,12 +30,12 @@ public class MiPerfil extends JDialog {
 
         this.admin = admin;
 
-        miPerfil.setTitle("Mi Perfil");
-        miPerfil.setSize(800, 900);
-        miPerfil.setResizable(false);
-        miPerfil.setLocationRelativeTo(null);
-        miPerfil.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        miPerfil.setLayout(new BorderLayout(10, 10));
+        setTitle("Mi Perfil");
+        setSize(800, 900);
+        setResizable(false);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        setLayout(new BorderLayout(10, 10));
 
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
 
@@ -58,6 +56,7 @@ public class MiPerfil extends JDialog {
         userNamme.setFont(new Font("Arial", Font.BOLD, 22));
         userNamme.setAlignmentX(Component.CENTER_ALIGNMENT);
         userNamme.setAlignmentY(Component.CENTER_ALIGNMENT);
+        userNamme.setText(admin.getActivePlayer().username);
 
         lbl3.setFont(new Font("Arial", Font.PLAIN, 18));
         lbl3.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -70,14 +69,18 @@ public class MiPerfil extends JDialog {
         lbl5.setFont(new Font("Arial", Font.PLAIN, 18));
         lbl5.setAlignmentX(Component.CENTER_ALIGNMENT);
         lbl5.setAlignmentY(Component.CENTER_ALIGNMENT);
+        lbl5.setText("Partidas jugadas: " + new String(String.valueOf(admin.getActivePlayer().partidasTotales)));
 
         lbl6.setFont(new Font("Arial", Font.PLAIN, 18));
         lbl6.setAlignmentX(Component.CENTER_ALIGNMENT);
         lbl6.setAlignmentY(Component.CENTER_ALIGNMENT);
+        lbl6.setText("Partidas jugadas como héroe: " + new String(String.valueOf(admin.getActivePlayer().partidasHeroes)));
 
         lbl7.setFont(new Font("Arial", Font.PLAIN, 18));
         lbl7.setAlignmentX(Component.CENTER_ALIGNMENT);
         lbl7.setAlignmentY(Component.CENTER_ALIGNMENT);
+        lbl7.setText("Partidas jugadas como villano: " +  new String(String.valueOf(admin.getActivePlayer().partidasVillanos)));
+
 
         cerrarSesion.setFont(new Font("Arial", Font.PLAIN, 20));
         cerrarSesion.setBackground(Color.decode("#cfe2f3"));
@@ -113,9 +116,6 @@ public class MiPerfil extends JDialog {
 
         panel1.add(Box.createVerticalGlue());
 
-        miPerfil.add(panel1, BorderLayout.CENTER);
-
-        miPerfil.setVisible(false);
-
+        add(panel1, BorderLayout.CENTER);
     }
 }
