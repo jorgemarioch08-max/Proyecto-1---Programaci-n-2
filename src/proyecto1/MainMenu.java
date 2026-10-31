@@ -19,7 +19,15 @@ public class MainMenu {
     JButton cerrarSesion = new JButton("Cerrar Sesion");
     JButton exit = new JButton("Salir");
 
-    public MainMenu() {
+    //JDialog que muestra el perfil
+    private MiPerfil miperfil;
+
+    //Admin
+    public PlayerManager admin;
+
+    public MainMenu(PlayerManager admin) {
+        miperfil = new MiPerfil(admin);
+
         //GUI
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menu.setSize(1600,900);
@@ -82,6 +90,18 @@ public class MainMenu {
             System.exit(0);
         });
 
+        perfil.addActionListener(e ->{
+            miperfil.setVisible(true);
+        });
+        cerrarSesion.addActionListener(e ->{
+            try {
+                admin.logoutPlayer();
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            JOptionPane.showMessageDialog(menu, "Has cerrado sesión con extio." +
+                    "\nPara poder jugar deber iniciar sesión o crear una nueva cuenta", "Sesión Cerrada", JOptionPane.INFORMATION_MESSAGE);
+        });
 
         menu.setVisible(true);
     }
