@@ -16,17 +16,16 @@ public class MainMenu {
     JButton partidaNueva = new JButton("Nueva partida");
     JButton perfil  = new JButton("Mi perfil");
     JButton universo = new JButton("Universo Marvel");
-    JButton cerrarSesion = new JButton("Cerrar Sesion");
     JButton exit = new JButton("Salir");
 
     //JDialog que muestra el perfil
-    private MiPerfil miperfil;
+    private MiPerfil verPerfil;
 
     //Admin
     public PlayerManager admin;
 
     public MainMenu(PlayerManager admin) {
-        miperfil = new MiPerfil(admin);
+        verPerfil = new MiPerfil(admin);
 
         //GUI
         menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,10 +47,6 @@ public class MainMenu {
         universo.setBackground(Color.decode("#cfe2f3"));
         universo.setMaximumSize(new Dimension(200, 50));
 
-        cerrarSesion.setFont(new Font("Arial", Font.PLAIN, 20));
-        cerrarSesion.setBackground(Color.decode("#cfe2f3"));
-        cerrarSesion.setMaximumSize(new Dimension(200, 50));
-
         exit.setFont(new Font("Arial", Font.PLAIN, 20));
         exit.setBackground(Color.decode("#cfe2f3"));
         exit.setMaximumSize(new Dimension(200, 50));
@@ -62,7 +57,6 @@ public class MainMenu {
         partidaNueva.setAlignmentX(Component.CENTER_ALIGNMENT);
         perfil.setAlignmentX(Component.CENTER_ALIGNMENT);
         universo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        cerrarSesion.setAlignmentX(Component.CENTER_ALIGNMENT);
         exit.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         menuPanel1.add(Box.createVerticalGlue());
@@ -75,8 +69,6 @@ public class MainMenu {
         menuPanel1.add(perfil);
         menuPanel1.add(Box.createVerticalStrut(5));
         menuPanel1.add(universo);
-        menuPanel1.add(Box.createVerticalStrut(5));
-        menuPanel1.add(cerrarSesion);
         menuPanel1.add(Box.createVerticalStrut(5));
         menuPanel1.add(exit);
 
@@ -91,16 +83,15 @@ public class MainMenu {
         });
 
         perfil.addActionListener(e ->{
-            miperfil.setVisible(true);
-        });
-        cerrarSesion.addActionListener(e ->{
             try {
-                admin.logoutPlayer();
-            } catch (Exception ex) {
+                admin.checkActivePlayer();
+                verPerfil.actualizarDatos();
+                verPerfil.setLocation(menu.getX() + 75, menu.getY() + 100);
+                verPerfil.setVisible(true);
+
+            } catch (NoAccountLoggedException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-            JOptionPane.showMessageDialog(menu, "Has cerrado sesión con extio." +
-                    "\nPara poder jugar deber iniciar sesión o crear una nueva cuenta", "Sesión Cerrada", JOptionPane.INFORMATION_MESSAGE);
         });
 
         menu.setVisible(true);

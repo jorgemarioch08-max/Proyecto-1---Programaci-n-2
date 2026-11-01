@@ -31,91 +31,96 @@ public class MiPerfil extends JDialog {
         this.admin = admin;
 
         setTitle("Mi Perfil");
-        setSize(800, 900);
+        setSize(400, 700);
         setResizable(false);
-        setLocationRelativeTo(null);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
+        panel1.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
 
         lbl1.setFont(new Font("Arial", Font.BOLD, 25));
-        lbl1.setAlignmentX(Component.CENTER_ALIGNMENT);
-        lbl1.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         Image img = icon.getImage();
-        Image imgsc =  img.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+        Image imgsc =  img.getScaledInstance(175, 175, Image.SCALE_SMOOTH);
         lbl1.setIcon(new ImageIcon(imgsc));
-        lbl1.setHorizontalAlignment(JLabel.CENTER);
-        lbl1.setVerticalAlignment(JLabel.TOP);
+        lbl1.setVerticalTextPosition(JLabel.TOP);
+        lbl1.setHorizontalTextPosition(JLabel.CENTER);
 
         lbl2.setFont(new Font("Arial", Font.PLAIN, 20));
-        lbl2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        lbl2.setAlignmentY(Component.CENTER_ALIGNMENT);
-
-        userNamme.setFont(new Font("Arial", Font.BOLD, 22));
-        userNamme.setAlignmentX(Component.CENTER_ALIGNMENT);
-        userNamme.setAlignmentY(Component.CENTER_ALIGNMENT);
-        userNamme.setText(admin.getActivePlayer().username);
-
+        userNamme.setFont(new Font("Arial", Font.BOLD, 25));
         lbl3.setFont(new Font("Arial", Font.PLAIN, 18));
-        lbl3.setAlignmentX(Component.CENTER_ALIGNMENT);
-        lbl3.setAlignmentY(Component.CENTER_ALIGNMENT);
-
         lbl4.setFont(new Font("Arial", Font.BOLD, 20));
-        lbl4.setAlignmentX(Component.CENTER_ALIGNMENT);
-        lbl4.setAlignmentY(Component.CENTER_ALIGNMENT);
-
         lbl5.setFont(new Font("Arial", Font.PLAIN, 18));
-        lbl5.setAlignmentX(Component.CENTER_ALIGNMENT);
-        lbl5.setAlignmentY(Component.CENTER_ALIGNMENT);
-        lbl5.setText("Partidas jugadas: " + new String(String.valueOf(admin.getActivePlayer().partidasTotales)));
-
         lbl6.setFont(new Font("Arial", Font.PLAIN, 18));
-        lbl6.setAlignmentX(Component.CENTER_ALIGNMENT);
-        lbl6.setAlignmentY(Component.CENTER_ALIGNMENT);
-        lbl6.setText("Partidas jugadas como héroe: " + new String(String.valueOf(admin.getActivePlayer().partidasHeroes)));
-
         lbl7.setFont(new Font("Arial", Font.PLAIN, 18));
-        lbl7.setAlignmentX(Component.CENTER_ALIGNMENT);
-        lbl7.setAlignmentY(Component.CENTER_ALIGNMENT);
-        lbl7.setText("Partidas jugadas como villano: " +  new String(String.valueOf(admin.getActivePlayer().partidasVillanos)));
-
 
         cerrarSesion.setFont(new Font("Arial", Font.PLAIN, 20));
         cerrarSesion.setBackground(Color.decode("#cfe2f3"));
-        cerrarSesion.setPreferredSize(new Dimension(200, 50));
-        cerrarSesion.setMaximumSize(new Dimension(200, 50));
+        cerrarSesion.setPreferredSize(new Dimension(200, 35));
+        cerrarSesion.setMaximumSize(new Dimension(200, 35));
 
         leaderboard.setFont(new Font("Arial", Font.PLAIN, 20));
         leaderboard.setBackground(Color.decode("#cfe2f3"));
-        leaderboard.setPreferredSize(new Dimension(200, 50));
-        leaderboard.setMaximumSize(new Dimension(200, 50));
+        leaderboard.setPreferredSize(new Dimension(200, 35));
+        leaderboard.setMaximumSize(new Dimension(200, 35));
 
         panel1.add(Box.createVerticalGlue());
 
         panel1.add(lbl1);
+        lbl1.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(10));
         panel1.add(lbl2);
-        panel1.add(Box.createVerticalStrut(8));
+        lbl2.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel1.add(Box.createVerticalStrut(5));
         panel1.add(userNamme);
+        userNamme.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(5));
         panel1.add(lbl3);
-        panel1.add(Box.createVerticalStrut(20));
+        lbl3.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel1.add(Box.createVerticalStrut(35));
         panel1.add(lbl4);
+        lbl4.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(15));
         panel1.add(lbl5);
+        lbl5.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(8));
         panel1.add(lbl6);
+        lbl6.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(8));
         panel1.add(lbl7);
-        panel1.add(Box.createVerticalStrut(20));
+        lbl7.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel1.add(Box.createVerticalStrut(35));
         panel1.add(cerrarSesion);
+        cerrarSesion.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(10));
         panel1.add(leaderboard);
+        leaderboard.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         panel1.add(Box.createVerticalGlue());
 
+
+        //Action Listeners
+        cerrarSesion.addActionListener(e ->{
+            try {
+                admin.logoutPlayer();
+                setVisible(false);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            JOptionPane.showMessageDialog(this, "Has cerrado sesión con extio." +
+                    "\nPara poder jugar deber iniciar sesión o crear una nueva cuenta", "Sesión Cerrada", JOptionPane.INFORMATION_MESSAGE);
+        });
+
         add(panel1, BorderLayout.CENTER);
+    }
+
+    public void actualizarDatos() {
+        Player lclplayer = admin.getActivePlayer();
+
+        userNamme.setText(lclplayer.username);
+        lbl5.setText("Partidas jugadas: " + lclplayer.partidasTotales);
+        lbl6.setText("Partidas jugadas como héroe: " + lclplayer.partidasHeroes);
+        lbl7.setText("Partidas jugadas como villano: " + lclplayer.partidasVillanos);
     }
 }
