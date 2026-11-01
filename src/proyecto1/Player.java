@@ -20,4 +20,9 @@ public class Player {
         this.login = false;
     }
 
+    public boolean checkPassword(String contra) {
+        return password.equals(contra);
+    }
+
+
 }

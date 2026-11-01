@@ -54,8 +54,24 @@ public class PlayerManager {
         }
     }
 
-    public void deletePlayer() {
-        System.out.println("Delete player");
+    public boolean deletePlayer(String password) throws NoAccountLoggedException {
+        checkActivePlayer();
+        if (!activePlayer.checkPassword(password)) {
+            return false;
+        }
+
+        Player eliminado = activePlayer;
+
+        for (int i = 0; i < players.length; i++) {
+            if (players[i] == eliminado) {
+                players[i] = null;
+                break;
+            }
+        }
+
+        eliminado.login = false;
+        activePlayer = null;
+        return true;
     }
 
     public void findPlayer() {
@@ -64,29 +80,23 @@ public class PlayerManager {
 
 
     //Getters
-
     public Player[] getPlayers() {
         return players;
     }
-
     public int getPlayerLimit() {
         return playerLimit;
     }
-
     public Player getActivePlayer() {
         return activePlayer;
     }
 
     //Setters
-
     public void setPlayers(Player[] players) {
         this.players = players;
     }
-
     public void setPlayerLimit(int playerLimit) {
         this.playerLimit = playerLimit;
     }
-
     public void setActivePlayer(Player activePlayer) {
         this.activePlayer = activePlayer;
     }

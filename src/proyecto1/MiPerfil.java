@@ -23,6 +23,7 @@ public class MiPerfil extends JDialog {
     ImageIcon icon = new ImageIcon("src/Imagenes/perfil.png");
 
     JButton cerrarSesion = new JButton("Cerrar sesion");
+    JButton deleteAcc = new JButton("Eliminar cuenta");
     JButton leaderboard = new JButton("Ver Leaderboard");
 
     public MiPerfil(PlayerManager admin) {
@@ -60,6 +61,11 @@ public class MiPerfil extends JDialog {
         cerrarSesion.setPreferredSize(new Dimension(200, 35));
         cerrarSesion.setMaximumSize(new Dimension(200, 35));
 
+        deleteAcc.setFont(new Font("Arial", Font.PLAIN, 20));
+        deleteAcc.setBackground(Color.decode("#cfe2f3"));
+        deleteAcc.setPreferredSize(new Dimension(200, 35));
+        deleteAcc.setMaximumSize(new Dimension(200, 35));
+
         leaderboard.setFont(new Font("Arial", Font.PLAIN, 20));
         leaderboard.setBackground(Color.decode("#cfe2f3"));
         leaderboard.setPreferredSize(new Dimension(200, 35));
@@ -94,6 +100,9 @@ public class MiPerfil extends JDialog {
         panel1.add(cerrarSesion);
         cerrarSesion.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(10));
+        panel1.add(deleteAcc);
+        deleteAcc.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel1.add(Box.createVerticalStrut(10));
         panel1.add(leaderboard);
         leaderboard.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -110,6 +119,35 @@ public class MiPerfil extends JDialog {
             }
             JOptionPane.showMessageDialog(this, "Has cerrado sesión con extio." +
                     "\nPara poder jugar deber iniciar sesión o crear una nueva cuenta", "Sesión Cerrada", JOptionPane.INFORMATION_MESSAGE);
+        });
+
+        deleteAcc.addActionListener(e -> {
+            JPasswordField password = new JPasswordField();
+            Object[] mensaje = {
+                    "Esta acción eliminará permanentemente tu cuenta.",
+                    "Ingresa tu contraseña actual:",
+                    password
+            };
+            int opcion = JOptionPane.showConfirmDialog(this, mensaje, "Eliminar cuenta", JOptionPane.OK_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE
+            );
+
+            if (opcion == JOptionPane.OK_OPTION) {
+                try {
+                    boolean eliminado = admin.deletePlayer(new String(password.getPassword())
+                    );
+                    if (eliminado) {
+                        JOptionPane.showMessageDialog(this, "Tu cuenta ha sido eliminada correctamente.", "Cuenta eliminada", JOptionPane.INFORMATION_MESSAGE
+                        );
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(this, "La contraseña ingresada es incorrecta.", "Error de autenticación", JOptionPane.ERROR_MESSAGE
+                        );
+                    }
+                } catch (NoAccountLoggedException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE
+                    );
+                }
+            }
         });
 
         add(panel1, BorderLayout.CENTER);
