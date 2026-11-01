@@ -24,7 +24,7 @@ public class MiPerfil extends JDialog {
 
     JButton cerrarSesion = new JButton("Cerrar sesion");
     JButton deleteAcc = new JButton("Eliminar cuenta");
-    JButton leaderboard = new JButton("Ver Leaderboard");
+    JButton newPass = new JButton("Cambiar contraseña");
 
     public MiPerfil(PlayerManager admin) {
         super((Frame) null, "Mi Perfil", false);
@@ -66,10 +66,10 @@ public class MiPerfil extends JDialog {
         deleteAcc.setPreferredSize(new Dimension(200, 35));
         deleteAcc.setMaximumSize(new Dimension(200, 35));
 
-        leaderboard.setFont(new Font("Arial", Font.PLAIN, 20));
-        leaderboard.setBackground(Color.decode("#cfe2f3"));
-        leaderboard.setPreferredSize(new Dimension(200, 35));
-        leaderboard.setMaximumSize(new Dimension(200, 35));
+        newPass.setFont(new Font("Arial", Font.PLAIN, 20));
+        newPass.setBackground(Color.decode("#cfe2f3"));
+        newPass.setPreferredSize(new Dimension(200, 35));
+        newPass.setMaximumSize(new Dimension(200, 35));
 
         panel1.add(Box.createVerticalGlue());
 
@@ -97,14 +97,16 @@ public class MiPerfil extends JDialog {
         panel1.add(lbl7);
         lbl7.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(35));
+        panel1.add(newPass);
+        newPass.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel1.add(Box.createVerticalStrut(10));
         panel1.add(cerrarSesion);
         cerrarSesion.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(10));
         panel1.add(deleteAcc);
         deleteAcc.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(10));
-        panel1.add(leaderboard);
-        leaderboard.setAlignmentX(Component.LEFT_ALIGNMENT);
+
 
         panel1.add(Box.createVerticalGlue());
 

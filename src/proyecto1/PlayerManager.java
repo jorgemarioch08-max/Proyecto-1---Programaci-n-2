@@ -1,8 +1,6 @@
 package proyecto1;
 
-import Exceptions.InvalidPasswordException;
-import Exceptions.InvalidUsernameException;
-import Exceptions.NoAccountLoggedException;
+import Exceptions.*;
 
 import javax.swing.*;
 
@@ -19,27 +17,37 @@ public class PlayerManager {
         this.activePlayer = null;
     }
 
-    public void createPlayer(String nombre, String contra) throws InvalidPasswordException, InvalidUsernameException {
-        //Verificar la contraseña
-        if (contra.length() != 5 || contra.contains(" ")) {
-            throw new InvalidPasswordException();
-        }
-        //Verificar el username
-        if (nombre.trim().isEmpty()) {
+    public void createPlayer(String nombre, String contra) throws InvalidPasswordException, InvalidUsernameException, DuplicatedUserException {
+        if (nombre == null || nombre.trim().isEmpty()) {
             throw new InvalidUsernameException();
         }
-
-        for (int i=0; i<this.players.length; i++) {
-            if (this.players[i] == null) {
-                players[i] = new Player(nombre.trim(), contra, 0, 0, 0, true);
-                activePlayer = players[i];
+        if (findPlayer(nombre) != null) {
+            throw new DuplicatedUserException();
+        }
+        if (contra == null || contra.length() != 5 || contra.contains(" ")) {
+            throw new InvalidPasswordException();
+        }
+        for (int i = 0; i < players.length; i++) {
+            if (players[i] == null) {
+                players[i] = new Player(nombre.trim(), contra, 0, 0, 0, false
+                );
                 break;
             }
         }
     }
 
-    public void loginPlayer() {
-        System.out.println("Log in Player");
+    public void loginPlayer(String findUser, String password) throws IncorrectUsernameException, IncorrectPasswordException {
+        Player foundPlayer = findPlayer(findUser);
+
+        if (foundPlayer == null) {
+            throw new IncorrectUsernameException();
+        }
+        if (!foundPlayer.checkPassword(password)) {
+            throw new IncorrectPasswordException();
+        }
+
+        activePlayer = foundPlayer;
+        activePlayer.login = true;
     }
 
     public void logoutPlayer() throws NoAccountLoggedException {
@@ -74,10 +82,17 @@ public class PlayerManager {
         return true;
     }
 
-    public void findPlayer() {
-        System.out.println("Find player");
-    }
+    public Player findPlayer(String findUser) {
+        Player foundPlayer = null;
 
+        for (int i = 0; i < players.length; i++) {
+            if (players[i] != null && players[i].username.equalsIgnoreCase(findUser.trim())) {
+                foundPlayer = players[i];
+                break;
+            }
+        }
+        return foundPlayer;
+    }
 
     //Getters
     public Player[] getPlayers() {
