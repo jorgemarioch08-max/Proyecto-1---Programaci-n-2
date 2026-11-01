@@ -83,6 +83,9 @@ public class PlayerManager {
     }
 
     public Player findPlayer(String findUser) {
+        if (findUser == null) {
+            return null;
+        }
         Player foundPlayer = null;
 
         for (int i = 0; i < players.length; i++) {

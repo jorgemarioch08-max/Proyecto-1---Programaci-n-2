@@ -28,7 +28,7 @@ public class MainMenu {
         verPerfil = new MiPerfil(admin);
 
         //GUI
-        menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         menu.setSize(1600,900);
         menu.setResizable(false);
         menu.setLayout(new BorderLayout(10, 10));

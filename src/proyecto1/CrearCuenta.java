@@ -116,7 +116,5 @@ public class CrearCuenta {
             }
         });
 
-
-        crearCuenta.setVisible(true);
     }
 }

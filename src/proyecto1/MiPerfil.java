@@ -115,7 +115,7 @@ public class MiPerfil extends JDialog {
         cerrarSesion.addActionListener(e ->{
             try {
                 admin.logoutPlayer();
-                setVisible(false);
+                setVisible(false); /////////CAMBIAR PARA PASAR A MENU INICIAL/////////////////////7
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -140,7 +140,7 @@ public class MiPerfil extends JDialog {
                     if (eliminado) {
                         JOptionPane.showMessageDialog(this, "Tu cuenta ha sido eliminada correctamente.", "Cuenta eliminada", JOptionPane.INFORMATION_MESSAGE
                         );
-                        dispose();
+                        dispose(); ////////////////////CAMBIAR PARA PASAR A MENU INICIAL/////////////////
                     } else {
                         JOptionPane.showMessageDialog(this, "La contraseña ingresada es incorrecta.", "Error de autenticación", JOptionPane.ERROR_MESSAGE
                         );
