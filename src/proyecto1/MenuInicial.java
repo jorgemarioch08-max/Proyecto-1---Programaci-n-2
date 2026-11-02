@@ -20,8 +20,7 @@ public class MenuInicial extends JFrame  {
 
     public MenuInicial(PlayerManager admin) {
         setTitle("Ingresar");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(800,500);
         setResizable(false);
         setLayout(new BorderLayout(10, 10));
@@ -47,12 +46,8 @@ public class MenuInicial extends JFrame  {
         hbox.add(Box.createHorizontalGlue());
 
         hbox.add(login);
-        login.setAlignmentX(Component.CENTER_ALIGNMENT);
-        login.setAlignmentY(Component.CENTER_ALIGNMENT);
         hbox.add(Box.createHorizontalStrut(10));
         hbox.add(crearAcc);
-        crearAcc.setAlignmentX(Component.CENTER_ALIGNMENT);
-        crearAcc.setAlignmentY(Component.CENTER_ALIGNMENT);
 
         hbox.add(Box.createHorizontalGlue());
 
@@ -61,16 +56,26 @@ public class MenuInicial extends JFrame  {
         vbox.add(Box.createVerticalGlue());
 
         vbox.add(titulo1);
-        titulo2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        vbox.add(Box.createVerticalStrut(20));
+        titulo1.setAlignmentX(Component.CENTER_ALIGNMENT);
+        vbox.add(Box.createVerticalStrut(40));
         vbox.add(titulo2);
         titulo2.setAlignmentX(Component.CENTER_ALIGNMENT);
-        vbox.add(Box.createVerticalStrut(10));
+        vbox.add(Box.createVerticalStrut(25));
         vbox.add(hbox);
         hbox.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         vbox.add(Box.createVerticalGlue());
 
         add(vbox,BorderLayout.CENTER);
+
+        setLocationRelativeTo(null);
+
+        crearAcc.addActionListener(e -> {
+           CrearCuenta windowC = new CrearCuenta(admin);
+           windowC.setVisible(true);
+        });
     }
+
+
+
 }

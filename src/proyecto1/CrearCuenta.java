@@ -6,11 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import Exceptions.*;
 
-public class CrearCuenta {
+public class CrearCuenta extends JDialog {
 
     //GUI
-    JDialog crearCuenta = new JDialog();
-
     JLabel titulo1 = new JLabel("Crear Cuenta");
     JLabel titulo2 = new JLabel("Para poder jugar es necesario crear una cuenta.");
     JLabel titulo3 = new JLabel("Nombre de usuario:");
@@ -35,13 +33,12 @@ public class CrearCuenta {
         this.admin=admin;
 
         //GUI
-        crearCuenta.setTitle("Crear Cuenta");
-        crearCuenta.setSize(500,800);
-        crearCuenta.setLocationRelativeTo(null);
-        crearCuenta.setResizable(false);
-        crearCuenta.setLayout(new BorderLayout(10,10));
-        crearCuenta.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-        crearCuenta.setModal(true);
+        setTitle("Crear Cuenta");
+        setSize(500,800);
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setLayout(new BorderLayout(10,10));
+        setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 
         titulo1.setFont(new Font("Arial", Font.BOLD, 18));
         titulo1.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -104,13 +101,13 @@ public class CrearCuenta {
 
         panel1.add(Box.createVerticalGlue());
 
-        crearCuenta.add(panel1,BorderLayout.CENTER);
+        add(panel1,BorderLayout.CENTER);
 
         //Botones
         crearAcc.addActionListener(e -> {
             try {
                 admin.createPlayer(user.getText(), new String(pass.getPassword()));
-                this.crearCuenta.dispose();
+                dispose();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             }
