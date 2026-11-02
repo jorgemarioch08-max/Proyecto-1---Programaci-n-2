@@ -74,6 +74,11 @@ public class MenuInicial extends JFrame  {
            CrearCuenta windowC = new CrearCuenta(admin);
            windowC.setVisible(true);
         });
+
+        login.addActionListener(e -> {
+           LogIn windowL = new LogIn(admin, this);
+           windowL.setVisible(true);
+        });
     }
 
 

@@ -18,11 +18,13 @@ public class CrearCuenta extends JDialog {
 
     JPanel panel1 = new JPanel();
     JPanel panel2 = new JPanel();
+    JPanel hbox = new JPanel();
 
     JTextField user = new JTextField();
     JPasswordField pass = new JPasswordField();
 
-    JButton crearAcc = new JButton("Crear cuenta");
+    JButton aceptar = new JButton("Aceptar");
+    JButton cancelar = new JButton("Cancelar");
 
     JOptionPane error = new JOptionPane("Error");
 
@@ -39,6 +41,7 @@ public class CrearCuenta extends JDialog {
         setResizable(false);
         setLayout(new BorderLayout(10,10));
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        setModal(true);
 
         titulo1.setFont(new Font("Arial", Font.BOLD, 18));
         titulo1.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -61,14 +64,19 @@ public class CrearCuenta extends JDialog {
         pass.setMaximumSize(new Dimension(300,25));
         pass.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        crearAcc.setFont(new Font("Arial", Font.PLAIN, 16));
-        crearAcc.setBackground(Color.decode("#cfe2f3"));
-        crearAcc.setPreferredSize(new Dimension(140,25));
-        crearAcc.setMaximumSize(new Dimension(140, 50));
+        aceptar.setFont(new Font("Arial", Font.PLAIN, 16));
+        aceptar.setBackground(Color.decode("#cfe2f3"));
+        aceptar.setPreferredSize(new Dimension(140,25));
+        aceptar.setMaximumSize(new Dimension(140, 25));
+
+        cancelar.setFont(new Font("Arial", Font.PLAIN, 16));
+        cancelar.setBackground(Color.decode("#cfe2f3"));
+        cancelar.setPreferredSize(new Dimension(140,25));
+        cancelar.setMaximumSize(new Dimension(140, 25));
 
         panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
-        panel2.setMaximumSize(new Dimension(300,100));
-        panel2.setPreferredSize(new Dimension(300,100));
+        panel2.setMaximumSize(new Dimension(300,150));
+        panel2.setPreferredSize(new Dimension(300,150));
 
         panel2.add(Box.createVerticalGlue());
 
@@ -84,6 +92,18 @@ public class CrearCuenta extends JDialog {
 
         panel2.add(Box.createVerticalGlue());
 
+        hbox.setLayout(new BoxLayout(hbox,BoxLayout.X_AXIS));
+        hbox.setPreferredSize(new Dimension(500,75));
+        hbox.setMaximumSize(new Dimension(500,75));
+
+        hbox.add(Box.createHorizontalGlue());
+
+        hbox.add(aceptar);
+        hbox.add(Box.createHorizontalStrut(10));
+        hbox.add(cancelar);
+
+        hbox.add(Box.createHorizontalGlue());
+
         panel1.setLayout(new BoxLayout(panel1,BoxLayout.Y_AXIS));
         panel1.setMaximumSize(new Dimension(500,500));
 
@@ -92,25 +112,29 @@ public class CrearCuenta extends JDialog {
         panel1.add(titulo1);
         panel1.add(Box.createVerticalStrut(20));
         panel1.add(titulo2);
-        panel1.add(Box.createVerticalStrut(30));
+        panel1.add(Box.createVerticalStrut(20));
         panel1.add(panel2);
         panel2.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(20));
-        panel1.add(crearAcc);
-        crearAcc.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel1.add(hbox);
+        aceptar.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         panel1.add(Box.createVerticalGlue());
 
         add(panel1,BorderLayout.CENTER);
 
         //Botones
-        crearAcc.addActionListener(e -> {
+        aceptar.addActionListener(e -> {
             try {
                 admin.createPlayer(user.getText(), new String(pass.getPassword()));
                 dispose();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             }
+        });
+
+        cancelar.addActionListener(e -> {
+            dispose();
         });
 
     }

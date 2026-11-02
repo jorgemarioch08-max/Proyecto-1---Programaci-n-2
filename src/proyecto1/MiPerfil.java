@@ -9,6 +9,8 @@ public class MiPerfil extends JDialog {
     //Admin
     PlayerManager admin;
 
+    MainMenu mainMenu;
+
     JPanel panel1 = new JPanel();
 
     JLabel lbl1 = new JLabel("Perfil");
@@ -26,10 +28,11 @@ public class MiPerfil extends JDialog {
     JButton deleteAcc = new JButton("Eliminar cuenta");
     JButton newPass = new JButton("Cambiar contraseña");
 
-    public MiPerfil(PlayerManager admin) {
+    public MiPerfil(PlayerManager admin,  MainMenu mainMenu) {
         super((Frame) null, "Mi Perfil", false);
 
         this.admin = admin;
+        this.mainMenu = mainMenu;
 
         setTitle("Mi Perfil");
         setSize(400, 700);
@@ -66,7 +69,7 @@ public class MiPerfil extends JDialog {
         deleteAcc.setPreferredSize(new Dimension(200, 35));
         deleteAcc.setMaximumSize(new Dimension(200, 35));
 
-        newPass.setFont(new Font("Arial", Font.PLAIN, 20));
+        newPass.setFont(new Font("Arial", Font.PLAIN, 14));
         newPass.setBackground(Color.decode("#cfe2f3"));
         newPass.setPreferredSize(new Dimension(200, 35));
         newPass.setMaximumSize(new Dimension(200, 35));
@@ -115,7 +118,10 @@ public class MiPerfil extends JDialog {
         cerrarSesion.addActionListener(e ->{
             try {
                 admin.logoutPlayer();
-                setVisible(false); /////////CAMBIAR PARA PASAR A MENU INICIAL/////////////////////7
+                mainMenu.dispose();
+                MenuInicial inicial = new MenuInicial(admin);
+                inicial.setVisible(true);
+                dispose();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -140,7 +146,10 @@ public class MiPerfil extends JDialog {
                     if (eliminado) {
                         JOptionPane.showMessageDialog(this, "Tu cuenta ha sido eliminada correctamente.", "Cuenta eliminada", JOptionPane.INFORMATION_MESSAGE
                         );
-                        dispose(); ////////////////////CAMBIAR PARA PASAR A MENU INICIAL/////////////////
+                        mainMenu.dispose();
+                        MenuInicial inicial = new MenuInicial(admin);
+                        inicial.setVisible(true);
+                        dispose();
                     } else {
                         JOptionPane.showMessageDialog(this, "La contraseña ingresada es incorrecta.", "Error de autenticación", JOptionPane.ERROR_MESSAGE
                         );

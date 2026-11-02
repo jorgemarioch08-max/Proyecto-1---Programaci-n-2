@@ -4,11 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import Exceptions.*;
 
-public class MainMenu {
+public class MainMenu extends JFrame {
 
     //GUI
-    JFrame menu = new JFrame("Menu Principal");
-
     JLabel menuTitulo1 = new JLabel("Marvel Heroes: Stratego");
 
     JPanel menuPanel1 = new JPanel();
@@ -25,13 +23,14 @@ public class MainMenu {
     public PlayerManager admin;
 
     public MainMenu(PlayerManager admin) {
-        verPerfil = new MiPerfil(admin);
+        verPerfil = new MiPerfil(admin, this);
 
         //GUI
-        menu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        menu.setSize(1600,900);
-        menu.setResizable(false);
-        menu.setLayout(new BorderLayout(10, 10));
+        setTitle("Marvel Heroes: Stratego");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(1600,900);
+        setResizable(false);
+        setLayout(new BorderLayout(10, 10));
 
         menuTitulo1.setFont(new Font("Arial", Font.BOLD, 36));
 
@@ -74,8 +73,8 @@ public class MainMenu {
 
         menuPanel1.add(Box.createVerticalGlue());
 
-        menu.add(menuPanel1, BorderLayout.CENTER);
-        menu.setLocationRelativeTo(null);
+        add(menuPanel1, BorderLayout.CENTER);
+        setLocationRelativeTo(null);
 
         //Botones
         exit.addActionListener(e ->{
@@ -86,7 +85,7 @@ public class MainMenu {
             try {
                 admin.checkActivePlayer();
                 verPerfil.actualizarDatos();
-                verPerfil.setLocation(menu.getX() + 75, menu.getY() + 100);
+                verPerfil.setLocation(getX() + 75, getY() + 100);
                 verPerfil.setVisible(true);
 
             } catch (NoAccountLoggedException ex) {
@@ -94,7 +93,6 @@ public class MainMenu {
             }
         });
 
-        menu.setVisible(true);
     }
 
 
