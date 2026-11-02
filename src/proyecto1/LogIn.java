@@ -132,8 +132,7 @@ public class LogIn extends JDialog {
                 dispose();
                 menu.setVisible(true);
             } catch (IncorrectUsernameException | IncorrectPasswordException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE
-                );
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de inicio de sesión", JOptionPane.ERROR_MESSAGE);
             }
         });
 

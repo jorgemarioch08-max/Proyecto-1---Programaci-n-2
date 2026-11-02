@@ -24,5 +24,7 @@ public class Player {
         return password.equals(contra);
     }
 
-
+    public void changePassword(String newPassword) {
+        this.password = newPassword;
+    }
 }

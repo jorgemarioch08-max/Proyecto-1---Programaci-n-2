@@ -69,7 +69,7 @@ public class MiPerfil extends JDialog {
         deleteAcc.setPreferredSize(new Dimension(200, 35));
         deleteAcc.setMaximumSize(new Dimension(200, 35));
 
-        newPass.setFont(new Font("Arial", Font.PLAIN, 14));
+        newPass.setFont(new Font("Arial", Font.BOLD, 14));
         newPass.setBackground(Color.decode("#cfe2f3"));
         newPass.setPreferredSize(new Dimension(200, 35));
         newPass.setMaximumSize(new Dimension(200, 35));
@@ -115,6 +115,34 @@ public class MiPerfil extends JDialog {
 
 
         //Action Listeners
+        newPass.addActionListener(e -> {
+            JPasswordField currentPassword = new JPasswordField();
+            JPasswordField newPassword = new JPasswordField();
+
+            Object[] mensaje = {
+                    "Ingresa tu contraseña actual:",
+                    currentPassword,
+                    "Ingresa tu nueva contraseña:",
+                    newPassword
+            };
+
+            int opc = JOptionPane.showConfirmDialog(this, mensaje, "Cambiar contraseña", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE
+            );
+
+            if (opc == JOptionPane.OK_OPTION) {
+                try {
+                    boolean cambiado = admin.changePassword(new String(currentPassword.getPassword()), new String(newPassword.getPassword()));
+                    if (cambiado) {
+                        JOptionPane.showMessageDialog(this, "Tu contraseña ha sido actualizada correctamente.", "Contraseña modificada", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "La contraseña actual es incorrecta.", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (InvalidPasswordException | NoAccountLoggedException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
         cerrarSesion.addActionListener(e ->{
             try {
                 admin.logoutPlayer();
@@ -125,7 +153,7 @@ public class MiPerfil extends JDialog {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
-            JOptionPane.showMessageDialog(this, "Has cerrado sesión con extio." +
+            JOptionPane.showMessageDialog(this, "Has cerrado sesión con exito." +
                     "\nPara poder jugar deber iniciar sesión o crear una nueva cuenta", "Sesión Cerrada", JOptionPane.INFORMATION_MESSAGE);
         });
 
@@ -144,19 +172,16 @@ public class MiPerfil extends JDialog {
                     boolean eliminado = admin.deletePlayer(new String(password.getPassword())
                     );
                     if (eliminado) {
-                        JOptionPane.showMessageDialog(this, "Tu cuenta ha sido eliminada correctamente.", "Cuenta eliminada", JOptionPane.INFORMATION_MESSAGE
-                        );
+                        JOptionPane.showMessageDialog(this, "Tu cuenta ha sido eliminada correctamente.", "Cuenta eliminada", JOptionPane.INFORMATION_MESSAGE);
                         mainMenu.dispose();
                         MenuInicial inicial = new MenuInicial(admin);
                         inicial.setVisible(true);
                         dispose();
                     } else {
-                        JOptionPane.showMessageDialog(this, "La contraseña ingresada es incorrecta.", "Error de autenticación", JOptionPane.ERROR_MESSAGE
-                        );
+                        JOptionPane.showMessageDialog(this, "La contraseña ingresada es incorrecta.", "Error de autenticación", JOptionPane.ERROR_MESSAGE);
                     }
                 } catch (NoAccountLoggedException ex) {
-                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE
-                    );
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

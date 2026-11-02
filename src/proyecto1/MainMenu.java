@@ -77,8 +77,8 @@ public class MainMenu extends JFrame {
         setLocationRelativeTo(null);
 
         //Botones
-        exit.addActionListener(e ->{
-            System.exit(0);
+        partidaNueva.addActionListener(e -> {
+            JOptionPane.showMessageDialog(this, "Función en construccion...", "No disponible", JOptionPane.WARNING_MESSAGE);
         });
 
         perfil.addActionListener(e ->{
@@ -93,6 +93,13 @@ public class MainMenu extends JFrame {
             }
         });
 
+        universo.addActionListener(e ->{
+            JOptionPane.showMessageDialog(this, "Función en construccion...", "No disponible", JOptionPane.WARNING_MESSAGE);
+        });
+
+        exit.addActionListener(e ->{
+            System.exit(0);
+        });
     }
 
 

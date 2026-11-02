@@ -97,6 +97,19 @@ public class PlayerManager {
         return foundPlayer;
     }
 
+    public boolean changePassword(String currentPassword, String newPassword) throws NoAccountLoggedException, InvalidPasswordException {
+        checkActivePlayer();
+        if (!activePlayer.checkPassword(currentPassword)) {
+            return false;
+        }
+        if (newPassword == null || newPassword.length() != 5 || newPassword.contains(" ")) {
+            throw new InvalidPasswordException();
+        }
+
+        activePlayer.changePassword(newPassword);
+        return true;
+    }
+
     //Getters
     public Player[] getPlayers() {
         return players;
