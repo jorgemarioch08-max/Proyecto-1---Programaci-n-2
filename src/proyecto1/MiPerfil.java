@@ -40,8 +40,18 @@ public class MiPerfil extends JDialog {
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout(10, 10));
 
+        lbl1.setForeground(Color.white);
+        lbl2.setForeground(Color.white);
+        userNamme.setForeground(Color.white);
+        lbl3.setForeground(Color.white);
+        lbl4.setForeground(Color.white);
+        lbl5.setForeground(Color.white);
+        lbl6.setForeground(Color.white);
+        lbl7.setForeground(Color.white);
+
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
         panel1.setBorder(BorderFactory.createEmptyBorder(20, 50, 20, 50));
+        panel1.setBackground(Color.decode("#333333"));
 
         lbl1.setFont(new Font("Arial", Font.BOLD, 25));
 

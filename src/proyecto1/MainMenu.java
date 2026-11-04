@@ -33,6 +33,7 @@ public class MainMenu extends JFrame {
         setLayout(new BorderLayout(10, 10));
 
         menuTitulo1.setFont(new Font("Arial", Font.BOLD, 36));
+        menuTitulo1.setForeground(Color.white);
 
         partidaNueva.setFont(new Font("Arial", Font.PLAIN, 20));
         partidaNueva.setBackground(Color.decode("#cfe2f3"));
@@ -57,6 +58,8 @@ public class MainMenu extends JFrame {
         perfil.setAlignmentX(Component.CENTER_ALIGNMENT);
         universo.setAlignmentX(Component.CENTER_ALIGNMENT);
         exit.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        menuPanel1.setBackground(Color.decode("#333333"));
 
         menuPanel1.add(Box.createVerticalGlue());
 

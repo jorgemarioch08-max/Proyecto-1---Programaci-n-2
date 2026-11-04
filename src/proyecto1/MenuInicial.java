@@ -24,10 +24,11 @@ public class MenuInicial extends JFrame  {
         setSize(800,500);
         setResizable(false);
         setLayout(new BorderLayout(10, 10));
-        setBackground(Color.decode("#eeeeee"));
 
         titulo1.setFont(new Font("Arial", Font.BOLD, 36));
+        titulo1.setForeground(Color.white);
         titulo2.setFont(new Font("Arial", Font.PLAIN, 18));
+        titulo2.setForeground(Color.white);
 
         login.setFont(new Font("Arial", Font.PLAIN, 20));
         login.setBackground(Color.decode("#cfe2f3"));
@@ -42,6 +43,7 @@ public class MenuInicial extends JFrame  {
         hbox.setLayout(new BoxLayout(hbox,BoxLayout.X_AXIS));
         hbox.setPreferredSize(new Dimension(500,75));
         hbox.setMaximumSize(new Dimension(500,75));
+        hbox.setBackground(Color.decode("#333333"));
 
         hbox.add(Box.createHorizontalGlue());
 
@@ -52,6 +54,7 @@ public class MenuInicial extends JFrame  {
         hbox.add(Box.createHorizontalGlue());
 
         vbox.setLayout(new BoxLayout(vbox,BoxLayout.Y_AXIS));
+        vbox.setBackground(Color.decode("#333333"));
 
         vbox.add(Box.createVerticalGlue());
 

@@ -42,6 +42,14 @@ public class LogIn extends JDialog {
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setModal(true);
 
+        hbox.setBackground(Color.decode("#333333"));
+        vbox.setBackground(Color.decode("#333333"));
+        vbox2.setBackground(Color.decode("#333333"));
+
+        titulo1.setBackground(Color.white);
+        nombre.setForeground(Color.white);
+        contrasena.setForeground(Color.white);
+
         titulo1.setFont(new Font("Arial", Font.BOLD, 18));
 
         Image img = icono.getImage();

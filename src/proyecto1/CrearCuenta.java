@@ -44,8 +44,12 @@ public class CrearCuenta extends JDialog {
         setModal(true);
 
         titulo1.setFont(new Font("Arial", Font.BOLD, 18));
+        titulo1.setForeground(Color.white);
         titulo1.setAlignmentX(Component.CENTER_ALIGNMENT);
         titulo2.setAlignmentX(Component.CENTER_ALIGNMENT);
+        titulo2.setForeground(Color.white);
+        titulo3.setForeground(Color.white);
+        titulo4.setForeground(Color.white);
 
         Image img = icono.getImage();
         Image imgsc = img.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
@@ -77,6 +81,7 @@ public class CrearCuenta extends JDialog {
         panel2.setLayout(new BoxLayout(panel2,BoxLayout.Y_AXIS));
         panel2.setMaximumSize(new Dimension(300,150));
         panel2.setPreferredSize(new Dimension(300,150));
+        panel2.setBackground(Color.decode("#333333"));
 
         panel2.add(Box.createVerticalGlue());
 
@@ -95,6 +100,7 @@ public class CrearCuenta extends JDialog {
         hbox.setLayout(new BoxLayout(hbox,BoxLayout.X_AXIS));
         hbox.setPreferredSize(new Dimension(500,75));
         hbox.setMaximumSize(new Dimension(500,75));
+        hbox.setBackground(Color.decode("#333333"));
 
         hbox.add(Box.createHorizontalGlue());
 
@@ -106,6 +112,7 @@ public class CrearCuenta extends JDialog {
 
         panel1.setLayout(new BoxLayout(panel1,BoxLayout.Y_AXIS));
         panel1.setMaximumSize(new Dimension(500,500));
+        panel1.setBackground(Color.decode("#333333"));
 
         panel1.add(Box.createVerticalGlue());
 

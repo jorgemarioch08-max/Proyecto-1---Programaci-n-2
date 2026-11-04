@@ -31,6 +31,7 @@ public class MenuJuego extends JFrame {
 
         grid.setLayout(new GridLayout(10, 10, 2, 2));
         grid.setPreferredSize(new Dimension(800, 800));
+        grid.setBackground(Color.decode("#333333"));
 
         crearBotones();
 
@@ -43,13 +44,13 @@ public class MenuJuego extends JFrame {
         panelLateral.setLayout(new BoxLayout(panelLateral, BoxLayout.Y_AXIS));
 
         heroesVPanel.setBackground(Color.decode("#999999"));
-        heroesVPanel.setPreferredSize(new Dimension(400, 300));
-        heroesVPanel.setMaximumSize(new Dimension(400, 300));
+        heroesVPanel.setPreferredSize(new Dimension(400, 230));
+        heroesVPanel.setMaximumSize(new Dimension(400, 230));
         heroesVPanel.setLayout(new FlowLayout());
 
         villanosVPanel.setBackground(Color.decode("#999999"));
-        villanosVPanel.setPreferredSize(new Dimension(400, 300));
-        villanosVPanel.setMaximumSize(new Dimension(400, 300));
+        villanosVPanel.setPreferredSize(new Dimension(400, 230));
+        villanosVPanel.setMaximumSize(new Dimension(400, 230));
         villanosVPanel.setLayout(new FlowLayout());
 
         lblTurno.setFont(new Font("Arial", Font.BOLD, 22));
@@ -70,32 +71,36 @@ public class MenuJuego extends JFrame {
         retiro.setFont(new Font("Arial", Font.BOLD, 20));
         retiro.setForeground(Color.white);
         retiro.setBackground(Color.decode("#990000"));
+        retiro.setFocusPainted(false);
+
+        panelLateral.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0));
+
+        lblTurno.setAlignmentX(Component.LEFT_ALIGNMENT);
+        ptsHeroes.setAlignmentX(Component.LEFT_ALIGNMENT);
+        ptsVillanos.setAlignmentX(Component.LEFT_ALIGNMENT);
+        heroesVlbl.setAlignmentX(Component.LEFT_ALIGNMENT);
+        heroesVPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        villanosVlbl.setAlignmentX(Component.LEFT_ALIGNMENT);
+        villanosVPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        retiro.setAlignmentX(Component.LEFT_ALIGNMENT);
 
         panelLateral.add(Box.createVerticalGlue());
 
         panelLateral.add(lblTurno);
-        lblTurno.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelLateral.add(Box.createVerticalStrut(10));
         panelLateral.add(ptsHeroes);
-        ptsHeroes.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelLateral.add(Box.createVerticalStrut(5));
         panelLateral.add(ptsVillanos);
-        ptsVillanos.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelLateral.add(Box.createVerticalStrut(10));
         panelLateral.add(heroesVlbl);
-        heroesVlbl.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelLateral.add(Box.createVerticalStrut(5));
         panelLateral.add(heroesVPanel);
-        heroesVPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelLateral.add(Box.createVerticalStrut(10));
         panelLateral.add(villanosVlbl);
-        villanosVPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelLateral.add(Box.createVerticalStrut(5));
         panelLateral.add(villanosVPanel);
-        villanosVPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelLateral.add(Box.createVerticalStrut(25));
         panelLateral.add(retiro);
-        retiro.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         panelLateral.add(Box.createVerticalGlue());
 
@@ -126,6 +131,8 @@ public class MenuJuego extends JFrame {
                 botones[fila][columna].addActionListener(e -> {
                     System.out.println(f + ", " + c);
                 });
+
+                botones[fila][columna].setFocusPainted(false);
 
                 grid.add(botones[fila][columna]);
             }
