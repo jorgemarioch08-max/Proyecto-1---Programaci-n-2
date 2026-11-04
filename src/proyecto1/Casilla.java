@@ -2,13 +2,12 @@ package proyecto1;
 
 public class Casilla {
 
-    Pieza pieza;
-    boolean prohibida;
-    int fila;
-    int columna;
+    private Pieza pieza;
+    private boolean prohibida;
+    private int fila;
+    private int columna;
 
-    public Casilla(Pieza pieza, int fila, int columna) {
-        this.pieza = null;
+    public Casilla(int fila, int columna, boolean prohibida) {
         this.fila = fila;
         this.columna = columna;
         this.prohibida = false;
@@ -16,18 +15,6 @@ public class Casilla {
 
     public void setPieza(Pieza pieza) {
         this.pieza = pieza;
-    }
-
-    public void setFila(int fila) {
-        this.fila = fila;
-    }
-
-    public void setColumna(int columna) {
-        this.columna = columna;
-    }
-
-    public void setProhibida(boolean prohibida) {
-        this.prohibida = prohibida;
     }
 
     public boolean isEmpty() {
