@@ -78,7 +78,7 @@ public class MainMenu extends JFrame {
 
         //Botones
         partidaNueva.addActionListener(e -> {
-            JOptionPane.showMessageDialog(this, "Función en construccion...", "No disponible", JOptionPane.WARNING_MESSAGE);
+            new MenuJuego(new Tablero()).setVisible(true);
         });
 
         perfil.addActionListener(e ->{
