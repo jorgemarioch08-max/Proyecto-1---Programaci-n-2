@@ -2,8 +2,8 @@ package proyecto1;
 
 public class Heroe extends Ficha {
 
-    public Heroe(int rango) {
-        super(rango, Bando.HEROES);
+    public Heroe(String nombre, int rango) {
+        super(nombre, rango, Bando.HEROES);
     }
 
 }
