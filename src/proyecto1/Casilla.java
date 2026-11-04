@@ -10,7 +10,7 @@ public class Casilla {
     public Casilla(int fila, int columna, boolean prohibida) {
         this.fila = fila;
         this.columna = columna;
-        this.prohibida = false;
+        this.prohibida = prohibida;
     }
 
     public void setPieza(Pieza pieza) {
