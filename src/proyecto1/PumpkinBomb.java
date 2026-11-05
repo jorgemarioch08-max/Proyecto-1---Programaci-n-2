@@ -10,7 +10,7 @@ public class PumpkinBomb extends Bomba {
 
     @Override
     public ImageIcon getImagen() {
-        return null;
+        return new ImageIcon("src/Imagenes/villanos/pumpkin_bomb.png");
     }
 
 }

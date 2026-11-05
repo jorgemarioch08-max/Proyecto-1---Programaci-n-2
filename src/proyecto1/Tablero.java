@@ -5,8 +5,8 @@ import java.util.Random;
 public class Tablero {
 
     private Casilla[][] casillas;
-
     private Random rd = new Random();
+    private Bando turno;
 
     private final int[] rangos = {10, 9, 8, 8, 7, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1};
 
@@ -23,6 +23,7 @@ public class Tablero {
             "juggernaut", "rhino", "carnage", "mole_man", "lizard", "mr_sinister", "sentinel_1",
             "ultron", "sandman", "leader", "viper", "sentinel_2", "electro", "black_widow_villain"};
 
+    //Constructor
     public Tablero() {
         casillas = new Casilla[10][10];
 
@@ -33,6 +34,8 @@ public class Tablero {
             }
         }
 
+        turno = Bando.HEROES;
+
         ordenarPiezas(Bando.HEROES);
         ordenarPiezas(Bando.VILLANOS);
 
@@ -40,6 +43,28 @@ public class Tablero {
 
     public Casilla getCasilla(int fila, int columna) {
         return casillas[fila][columna];
+    }
+
+    public Bando getTurno() {
+        return turno;
+    }
+
+    public void cambiarTurno() {
+        if (turno == Bando.HEROES) {
+            turno = Bando.VILLANOS;
+        }
+        else {
+            turno = Bando.HEROES;
+        }
+    }
+
+    public boolean esVisible(Pieza pieza) {
+        if (pieza.getBando() == turno || pieza.estaRevelada()) {
+            return true;
+        }
+        else  {
+            return false;
+        }
     }
 
     public boolean dentroDelTablero(int fila, int columna) {

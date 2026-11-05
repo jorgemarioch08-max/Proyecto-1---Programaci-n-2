@@ -10,7 +10,7 @@ public class NovaBlast extends Bomba {
 
     @Override
     public ImageIcon getImagen() {
-        return null;
+        return new ImageIcon("src/Imagenes/heroes/novablast.png");
     }
 
 }

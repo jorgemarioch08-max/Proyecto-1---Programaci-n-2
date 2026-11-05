@@ -93,6 +93,7 @@ public class MenuJuego extends JFrame {
         add(zonaTablero, BorderLayout.CENTER);
         add(panelLateral, BorderLayout.EAST);
 
+        actualizarTablero();
 
     }
 
@@ -115,7 +116,8 @@ public class MenuJuego extends JFrame {
 
                 //////////////////////////TEMPORAL//////////////////////////
                 botones[fila][columna].addActionListener(e -> {
-                    System.out.println(f + ", " + c);
+                    tablero.cambiarTurno();
+                    actualizarTablero();
                 });
 
                 botones[fila][columna].setFocusPainted(false);
@@ -124,5 +126,51 @@ public class MenuJuego extends JFrame {
             }
         }
     }
+
+    public void actualizarTablero() {
+        for(int fila = 0; fila < 10; fila++){
+            for(int columna = 0; columna < 10; columna++){
+                JButton boton =  botones[fila][columna];
+                Casilla casilla = tablero.getCasilla(fila, columna);
+                Pieza pieza = casilla.getPieza();
+
+                boton.setIcon(null);
+                boton.setText("");
+
+                if (casilla.isProhibida()) {
+                    boton.setBackground(Color.yellow);
+                }
+                else if (pieza == null) {
+                    boton.setBackground(Color.white);
+                }
+                else if (tablero.esVisible(pieza)) {
+                    Image img = pieza.getImagen().getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+                    boton.setIcon(new ImageIcon(img));
+
+                    if (pieza.getBando() == Bando.HEROES) {
+                        boton.setBackground(Color.decode("#4a6fa5"));
+                    }
+                    else {
+                        boton.setBackground(Color.decode("#c0392b"));
+                    }
+                }
+                else  {
+                    boton.setText("?");
+                    boton.setFont(new Font("Arial", Font.BOLD, 130));
+                    boton.setForeground(Color.white);
+
+                    if (pieza.getBando() == Bando.HEROES) {
+                        boton.setBackground(Color.decode("#1f3a5f"));
+                    }
+                    else {
+                        boton.setBackground(Color.decode("#5c0000"));
+                    }
+                }
+            }
+        }
+
+        lblTurno.setText("Turno de: "+tablero.getTurno());
+    }
+
 }
 

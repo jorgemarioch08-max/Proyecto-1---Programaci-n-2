@@ -19,7 +19,10 @@ public class Tierra implements Pieza {
 
     @Override
     public ImageIcon getImagen() {
-        return null;
+        if (bando == Bando.HEROES) {
+            return new ImageIcon("src/Imagenes/heroes/la_tierra_hero.png");
+        }
+        return new ImageIcon("src/Imagenes/villanos/la_tierra_villain.png");
     }
 
     //Estado
