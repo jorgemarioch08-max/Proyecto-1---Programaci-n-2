@@ -1,8 +1,12 @@
 package proyecto1;
 
+import java.util.Random;
+
 public class Tablero {
 
     private Casilla[][] casillas;
+
+    private Random rd = new Random();
 
     private int[] rangos = {10, 9, 8, 8, 7, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1};
 
@@ -39,17 +43,17 @@ public class Tablero {
         return fila >= 0 && fila < 10 && columna >= 0 && columna < 10;
     }
 
-    public Pieza[] crearPiezas(Pieza[] piezas, Bando bando) {
-        piezas = new Pieza[40];
+    public Pieza[] crearPiezas(Bando bando) {
+        Pieza[] piezas = new Pieza[40];
         for (int i = 0; i < 40; i++) {
-            if (i >= 0 && i < 33) {
+            if (i < 33) {
                 if (bando.equals(Bando.HEROES)) {
                     piezas[i] = new Heroe(nombresHeroes[i], rangos[i]);
                 }
                 else {
                     piezas[i] = new Villano(nombresVillanos[i], rangos[i]);
                 }
-            } else if (i >= 33 && i < 39) {
+            } else if (i < 39) {
                 if (bando.equals(Bando.HEROES)) {
                     piezas[i] = new NovaBlast(bando);
                 }
@@ -63,6 +67,19 @@ public class Tablero {
         }
 
         return piezas;
+    }
+
+    public void colocarRdm (Pieza pieza, int filaMin, int filaMax) {
+        int fila = filaMin + rd.nextInt(filaMax - filaMin + 1);
+        int columna = rd.nextInt(10);
+
+        if (casillas[fila][columna].isEmpty()) {
+            casillas[fila][columna].setPieza(pieza);
+        }
+        else {
+            colocarRdm(pieza, filaMin, filaMax);
+        }
+
     }
 
 }
