@@ -8,16 +8,16 @@ public class Tablero {
 
     private Random rd = new Random();
 
-    private int[] rangos = {10, 9, 8, 8, 7, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1};
+    private final int[] rangos = {10, 9, 8, 8, 7, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1};
 
-    private String[] nombresHeroes = {"mr_fantastic", "captain_america", "professor_x", "nick_fury",
+    private final String[] nombresHeroes = {"mr_fantastic", "captain_america", "professor_x", "nick_fury",
             "spider_man", "wolverine", "namor", "daredevil", "silver_surfer", "hulk", "iron_man",
             "thor", "human_torch", "cyclops", "invisible_woman", "ghost_rider", "punisher", "blade",
             "the_thing", "emma_frost", "she_hulk", "giant_man", "beast", "colossus", "gambit",
             "spider_girl", "iceman", "storm", "phoenix", "dr_strange", "elektra", "nightcrawler",
             "black_widow_hero"};
 
-    private String[] nombresVillanos = {"dr_doom", "galactus", "kingpin", "magneto", "apocalypse",
+    private final String[] nombresVillanos = {"dr_doom", "galactus", "kingpin", "magneto", "apocalypse",
             "green_goblin", "venom", "bullseye", "omega_red", "onslaught", "red_skull", "mystique",
             "mysterio", "dr_octopus", "deadpool", "abomination", "thanos", "black_cat", "sabretooth",
             "juggernaut", "rhino", "carnage", "mole_man", "lizard", "mr_sinister", "sentinel_1",
@@ -32,6 +32,9 @@ public class Tablero {
                 casillas[i][j] = new Casilla(i, j, prohibida);
             }
         }
+
+        ordenarPiezas(Bando.HEROES);
+        ordenarPiezas(Bando.VILLANOS);
 
     }
 
@@ -69,7 +72,7 @@ public class Tablero {
         return piezas;
     }
 
-    public void colocarRdm (Pieza pieza, int filaMin, int filaMax) {
+    private void colocarRdm (Pieza pieza, int filaMin, int filaMax) {
         int fila = filaMin + rd.nextInt(filaMax - filaMin + 1);
         int columna = rd.nextInt(10);
 
@@ -80,6 +83,59 @@ public class Tablero {
             colocarRdm(pieza, filaMin, filaMax);
         }
 
+    }
+
+    private void ordenarPiezas(Bando bando) {
+        Pieza[] piezas = crearPiezas(bando);
+
+        int filaTierra;
+        int filaFrente;
+        int fondoMin;
+        int fondoMax;
+        int medioMin;
+        int medioMax;
+        int filaMin;
+        int filaMax;
+
+        if (bando == Bando.VILLANOS) {
+            filaTierra = 0;
+            filaFrente = 1;
+            fondoMin = 0;
+            fondoMax = 1;
+            medioMin = 2;
+            medioMax = 3;
+            filaMin = 0;
+            filaMax = 3;
+        }
+        else {
+            filaTierra = 9;
+            filaFrente = 8;
+            fondoMin = 8;
+            fondoMax = 9;
+            medioMin = 6;
+            medioMax = 7;
+            filaMin = 6;
+            filaMax = 9;
+        }
+
+        int columna = rd.nextInt(8) + 1;
+        casillas[filaTierra][columna].setPieza(piezas[39]);
+        casillas[filaTierra][columna - 1].setPieza(piezas[33]);
+        casillas[filaTierra][columna + 1].setPieza(piezas[34]);
+        casillas[filaFrente][columna].setPieza(piezas[35]);
+
+        for (int i = 36; i < 39; i++) {
+            colocarRdm(piezas[i], fondoMin, fondoMax);
+        }
+
+        for (int i = 24; i < 32; i++) {
+            colocarRdm(piezas[i], medioMin, medioMax);
+        }
+
+        for (int i = 0; i < 24; i++) {
+            colocarRdm(piezas[i], filaMin, filaMax);
+        }
+        colocarRdm(piezas[32], filaMin, filaMax);
     }
 
 }
