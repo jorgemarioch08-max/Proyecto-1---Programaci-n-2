@@ -51,8 +51,6 @@ public class MainMenu extends JFrame {
         exit.setBackground(Color.decode("#cfe2f3"));
         exit.setMaximumSize(new Dimension(200, 50));
 
-        menuPanel1.setBackground(Color.decode("#eeeeee"));
-
         menuTitulo1.setAlignmentX(Component.CENTER_ALIGNMENT);
         partidaNueva.setAlignmentX(Component.CENTER_ALIGNMENT);
         perfil.setAlignmentX(Component.CENTER_ALIGNMENT);

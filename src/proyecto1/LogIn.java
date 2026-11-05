@@ -46,7 +46,7 @@ public class LogIn extends JDialog {
         vbox.setBackground(Color.decode("#333333"));
         vbox2.setBackground(Color.decode("#333333"));
 
-        titulo1.setBackground(Color.white);
+        titulo1.setForeground(Color.white);
         nombre.setForeground(Color.white);
         contrasena.setForeground(Color.white);
 
