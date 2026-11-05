@@ -13,8 +13,6 @@ public class MenuJuego extends JFrame {
     JPanel villanosVPanel = new JPanel();
 
     JLabel lblTurno = new JLabel("Turno de: ");
-    JLabel ptsHeroes = new JLabel("Puntos de los Heroes: ");
-    JLabel ptsVillanos = new JLabel("Puntos de los Villanos: ");
     JLabel heroesVlbl = new JLabel("Héroes Vencidos: ");
     JLabel villanosVlbl = new JLabel("Villanos Vencidos: ");
 
@@ -56,12 +54,6 @@ public class MenuJuego extends JFrame {
         lblTurno.setFont(new Font("Arial", Font.BOLD, 22));
         lblTurno.setForeground(Color.white);
 
-        ptsHeroes.setFont(new Font("Arial", Font.PLAIN, 16));
-        ptsHeroes.setForeground(Color.white);
-
-        ptsVillanos.setFont(new Font("Arial", Font.PLAIN, 16));
-        ptsVillanos.setForeground(Color.white);
-
         heroesVlbl.setFont(new Font("Arial", Font.BOLD, 16));
         heroesVlbl.setForeground(Color.white);
 
@@ -76,8 +68,6 @@ public class MenuJuego extends JFrame {
         panelLateral.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 0));
 
         lblTurno.setAlignmentX(Component.LEFT_ALIGNMENT);
-        ptsHeroes.setAlignmentX(Component.LEFT_ALIGNMENT);
-        ptsVillanos.setAlignmentX(Component.LEFT_ALIGNMENT);
         heroesVlbl.setAlignmentX(Component.LEFT_ALIGNMENT);
         heroesVPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         villanosVlbl.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -87,11 +77,7 @@ public class MenuJuego extends JFrame {
         panelLateral.add(Box.createVerticalGlue());
 
         panelLateral.add(lblTurno);
-        panelLateral.add(Box.createVerticalStrut(10));
-        panelLateral.add(ptsHeroes);
-        panelLateral.add(Box.createVerticalStrut(5));
-        panelLateral.add(ptsVillanos);
-        panelLateral.add(Box.createVerticalStrut(10));
+        panelLateral.add(Box.createVerticalStrut(25));
         panelLateral.add(heroesVlbl);
         panelLateral.add(Box.createVerticalStrut(5));
         panelLateral.add(heroesVPanel);
