@@ -138,10 +138,13 @@ public class MenuJuego extends JFrame {
                 boton.setIcon(null);
                 boton.setText("");
 
+                //Sin pieza, se ve el fondo
                 if (pieza == null) {
                     boton.setContentAreaFilled(false);
                 }
+                //Pieza revelada
                 else if (tablero.esVisible(pieza)) {
+                    boton.setContentAreaFilled(true);
                     Image img = pieza.getImagen().getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
                     boton.setIcon(new ImageIcon(img));
 
@@ -152,7 +155,9 @@ public class MenuJuego extends JFrame {
                         boton.setBackground(Color.decode("#c0392b"));
                     }
                 }
+                //Pieza oculta
                 else  {
+                    boton.setContentAreaFilled(true);
                     boton.setText("?");
                     boton.setFont(new Font("Arial", Font.BOLD, 40));
                     boton.setForeground(Color.white);
