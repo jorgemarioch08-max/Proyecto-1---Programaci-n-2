@@ -7,7 +7,7 @@ public class MenuJuego extends JFrame {
 
     Tablero tablero;
     JButton[][] botones;
-    JPanel grid = new JPanel();
+    JLabel grid = new JLabel(new ImageIcon("src/Imagenes/tablero.png"));
     JPanel panelLateral = new JPanel();
     JPanel heroesVPanel = new JPanel();
     JPanel villanosVPanel = new JPanel();
@@ -29,7 +29,6 @@ public class MenuJuego extends JFrame {
 
         grid.setLayout(new GridLayout(10, 10, 2, 2));
         grid.setPreferredSize(new Dimension(800, 800));
-        grid.setBackground(Color.decode("#333333"));
 
         crearBotones();
 
@@ -60,7 +59,9 @@ public class MenuJuego extends JFrame {
         villanosVlbl.setFont(new Font("Arial", Font.BOLD, 16));
         villanosVlbl.setForeground(Color.white);
 
-        retiro.setFont(new Font("Arial", Font.BOLD, 20));
+        retiro.setFont(new Font("Arial", Font.BOLD, 25));
+        retiro.setPreferredSize(new Dimension(200, 50));
+        retiro.setMaximumSize(new Dimension(200, 50));
         retiro.setForeground(Color.white);
         retiro.setBackground(Color.decode("#990000"));
         retiro.setFocusPainted(false);
@@ -85,7 +86,7 @@ public class MenuJuego extends JFrame {
         panelLateral.add(villanosVlbl);
         panelLateral.add(Box.createVerticalStrut(5));
         panelLateral.add(villanosVPanel);
-        panelLateral.add(Box.createVerticalStrut(25));
+        panelLateral.add(Box.createVerticalStrut(50));
         panelLateral.add(retiro);
 
         panelLateral.add(Box.createVerticalGlue());
@@ -137,11 +138,8 @@ public class MenuJuego extends JFrame {
                 boton.setIcon(null);
                 boton.setText("");
 
-                if (casilla.isProhibida()) {
-                    boton.setBackground(Color.yellow);
-                }
-                else if (pieza == null) {
-                    boton.setBackground(Color.white);
+                if (pieza == null) {
+                    boton.setContentAreaFilled(false);
                 }
                 else if (tablero.esVisible(pieza)) {
                     Image img = pieza.getImagen().getImage().getScaledInstance(70, 70, Image.SCALE_SMOOTH);
@@ -156,7 +154,7 @@ public class MenuJuego extends JFrame {
                 }
                 else  {
                     boton.setText("?");
-                    boton.setFont(new Font("Arial", Font.BOLD, 130));
+                    boton.setFont(new Font("Arial", Font.BOLD, 40));
                     boton.setForeground(Color.white);
 
                     if (pieza.getBando() == Bando.HEROES) {
