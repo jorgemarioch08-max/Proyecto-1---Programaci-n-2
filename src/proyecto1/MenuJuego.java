@@ -115,7 +115,6 @@ public class MenuJuego extends JFrame {
                 int f = fila;
                 int c = columna;
 
-                //////////////////////////TEMPORAL//////////////////////////
                 botones[fila][columna].addActionListener(e -> {
                     clickCasilla(f,c);
                     actualizarTablero();
@@ -187,7 +186,9 @@ public class MenuJuego extends JFrame {
 
     public void clickCasilla(int fila, int columna) {
         if (tablero.esMovimientoValido(fila, columna)) {
-            System.out.println("Mover a "+fila+", "+columna);
+            if (tablero.esMovimientoValido(fila, columna)) {
+                tablero.mover(fila, columna);
+            }
         }
         else {
             tablero.seleccionar(fila, columna);

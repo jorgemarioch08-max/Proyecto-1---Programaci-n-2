@@ -9,6 +9,12 @@ public class Tablero {
     private Bando turno;
     private Casilla seleccionada;
 
+    private Bando ganador;
+    private Pieza[] heroesVencidos = new Pieza[40];
+    private Pieza[] villanosVencidos  = new Pieza[40];
+    private int contHeroesV = 0;
+    private int contVillanosV = 0;
+
     private final int[] rangos = {10, 9, 8, 8, 7, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1};
 
     private final String[] nombresHeroes = {"mr_fantastic", "captain_america", "professor_x", "nick_fury",
@@ -42,6 +48,7 @@ public class Tablero {
 
     }
 
+    //Getters
     public Casilla getCasilla(int fila, int columna) {
         return casillas[fila][columna];
     }
@@ -52,6 +59,26 @@ public class Tablero {
 
     public Bando getTurno() {
         return turno;
+    }
+
+    public Bando getGanador() {
+        return ganador;
+    }
+
+    public Pieza[] getHeroesVencidos() {
+        return heroesVencidos;
+    }
+
+    public Pieza[] getVillanosVencidos() {
+        return villanosVencidos;
+    }
+
+    public int getContHeroesV() {
+        return contHeroesV;
+    }
+
+    public int getContVillanosV() {
+        return contVillanosV;
     }
 
     public void cambiarTurno() {
@@ -227,5 +254,56 @@ public class Tablero {
         }
 
     }
+
+    public void mover(int fila, int columna) {
+        Casilla destino = casillas[fila][columna];
+        Pieza atacante = seleccionada.getPieza();
+        Pieza defensor = destino.getPieza();
+
+        if (defensor == null) {
+            destino.setPieza(atacante);
+            seleccionada.setPieza(null);
+        }
+        else {
+            atacante.revelar();
+            defensor.revelar();
+
+            switch (combate((Movible) atacante, defensor)) {
+                case GANA:
+                    if (defensor instanceof Tierra) {
+                        ganador = turno;
+                    }
+                    agregarVencido(defensor);
+                    destino.setPieza(atacante);
+                    seleccionada.setPieza(null);
+                    break;
+                case PIERDE:
+                    agregarVencido(atacante);
+                    seleccionada.setPieza(null);
+                    break;
+                case EMPATE:
+                    agregarVencido(atacante);
+                    agregarVencido(defensor);
+                    destino.setPieza(null);
+                    seleccionada.setPieza(null);
+                    break;
+            }
+        }
+        seleccionada = null;
+        cambiarTurno();
+    }
+
+    private void agregarVencido(Pieza pieza) {
+        if (pieza.getBando().equals(Bando.HEROES)) {
+            heroesVencidos[contHeroesV] = pieza;
+            contHeroesV++;
+        }
+        else {
+            villanosVencidos[contVillanosV] = pieza;
+            contVillanosV++;
+        }
+    }
+
+
 
 }
