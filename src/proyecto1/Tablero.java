@@ -198,4 +198,34 @@ public class Tablero {
         return distancia == 1;
     }
 
+    public Resultado combate(Movible atacante, Pieza defensor) {
+        if (defensor instanceof Tierra) {
+            return Resultado.GANA;
+        }
+        if (defensor instanceof Bomba) {
+            if (atacante.getRango() == 3) {
+                return Resultado.GANA;
+            }
+            else  {
+                return Resultado.PIERDE;
+            }
+        }
+
+        int rangoAtacante = atacante.getRango();
+        int rangoDefensor = ((Movible) defensor).getRango();
+
+        if (rangoAtacante == 1 && rangoDefensor == 10) {
+            return Resultado.GANA;
+        }
+        if (rangoAtacante > rangoDefensor) {
+            return Resultado.GANA;
+        } else if (rangoAtacante < rangoDefensor) {
+            return Resultado.PIERDE;
+        }
+        else  {
+            return Resultado.EMPATE;
+        }
+
+    }
+
 }
