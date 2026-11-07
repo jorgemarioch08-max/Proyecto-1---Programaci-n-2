@@ -46,7 +46,7 @@ public class Tablero {
         return casillas[fila][columna];
     }
 
-    public Casilla getCasilla() {
+    public Casilla getSeleccionada() {
         return seleccionada;
     }
 
@@ -98,7 +98,6 @@ public class Tablero {
                 piezas[i] = new Tierra(bando);
             }
         }
-
         return piezas;
     }
 
@@ -180,5 +179,23 @@ public class Tablero {
         }
     }
 
+    public boolean esMovimientoValido(int fila, int columna) {
+        if (seleccionada != null) {
+            return false;
+        }
+
+        Casilla destino = casillas[fila][columna];
+
+        if (destino.isProhibida()) {
+            return false;
+        }
+        if (!destino.isEmpty() && destino.getPieza().getBando() == turno) {
+            return false;
+        }
+
+        int distancia = Math.abs(fila - seleccionada.getFila()) +  Math.abs(columna - seleccionada.getColumna());
+
+        return distancia == 1;
+    }
 
 }
