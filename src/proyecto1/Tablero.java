@@ -172,7 +172,7 @@ public class Tablero {
         Casilla casilla = casillas[fila][columna];
         Pieza pieza = casilla.getPieza();
 
-        if (!casilla.isEmpty() && pieza.getBando() == turno && pieza instanceof NovaBlast) {
+        if (!casilla.isEmpty() && pieza.getBando() == turno && pieza instanceof Movible) {
             seleccionada = casilla;
         }
         else  {
