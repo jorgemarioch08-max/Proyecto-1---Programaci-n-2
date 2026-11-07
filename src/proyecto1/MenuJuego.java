@@ -117,7 +117,7 @@ public class MenuJuego extends JFrame {
 
                 //////////////////////////TEMPORAL//////////////////////////
                 botones[fila][columna].addActionListener(e -> {
-                    tablero.cambiarTurno();
+                    clickCasilla(f,c);
                     actualizarTablero();
                 });
 
@@ -137,6 +137,16 @@ public class MenuJuego extends JFrame {
 
                 boton.setIcon(null);
                 boton.setText("");
+
+                if (casilla == tablero.getSeleccionada()) {
+                    boton.setBorder(BorderFactory.createLineBorder(Color.decode("#ffc925"), 3));
+                }
+                else if (tablero.esMovimientoValido(fila, columna)) {
+                    boton.setBorder(BorderFactory.createLineBorder(Color.decode("#8fce00"), 3));
+                }
+                else {
+                    boton.setBorder(BorderFactory.createLineBorder(Color.darkGray, 1));
+                }
 
                 //Sin pieza, se ve el fondo
                 if (pieza == null) {
@@ -173,6 +183,17 @@ public class MenuJuego extends JFrame {
         }
 
         lblTurno.setText("Turno de: "+tablero.getTurno());
+    }
+
+    public void clickCasilla(int fila, int columna) {
+        if (tablero.esMovimientoValido(fila, columna)) {
+            System.out.println("Mover a "+fila+", "+columna);
+        }
+        else {
+            tablero.seleccionar(fila, columna);
+        }
+
+        actualizarTablero();
     }
 
 }
