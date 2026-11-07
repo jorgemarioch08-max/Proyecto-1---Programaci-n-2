@@ -7,6 +7,7 @@ public class Tablero {
     private Casilla[][] casillas;
     private Random rd = new Random();
     private Bando turno;
+    private Casilla seleccionada;
 
     private final int[] rangos = {10, 9, 8, 8, 7, 7, 7, 6, 6, 6, 6, 5, 5, 5, 5, 4, 4, 4, 4, 3, 3, 3, 3, 3, 2, 2, 2, 2, 2, 2, 2, 2, 1};
 
@@ -43,6 +44,10 @@ public class Tablero {
 
     public Casilla getCasilla(int fila, int columna) {
         return casillas[fila][columna];
+    }
+
+    public Casilla getCasilla() {
+        return seleccionada;
     }
 
     public Bando getTurno() {
@@ -162,5 +167,18 @@ public class Tablero {
         }
         colocarRdm(piezas[32], filaMin, filaMax);
     }
+
+    public void seleccionar(int fila, int columna) {
+        Casilla casilla = casillas[fila][columna];
+        Pieza pieza = casilla.getPieza();
+
+        if (!casilla.isEmpty() && pieza.getBando() == turno && pieza instanceof NovaBlast) {
+            seleccionada = casilla;
+        }
+        else  {
+            seleccionada = null;
+        }
+    }
+
 
 }

@@ -2,7 +2,7 @@ package proyecto1;
 
 import javax.swing.*;
 
-public class Ficha implements Pieza {
+public class Ficha implements Pieza, Movible {
 
     private String nombre;
     private int rango;
@@ -25,6 +25,7 @@ public class Ficha implements Pieza {
         return nombre;
     }
 
+    @Override
     public int getRango() {
         return rango;
     }
