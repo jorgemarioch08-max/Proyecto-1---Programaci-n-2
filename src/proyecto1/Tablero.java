@@ -180,7 +180,7 @@ public class Tablero {
     }
 
     public boolean esMovimientoValido(int fila, int columna) {
-        if (seleccionada != null) {
+        if (seleccionada == null) {
             return false;
         }
 
