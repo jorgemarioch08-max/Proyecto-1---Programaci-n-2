@@ -118,6 +118,12 @@ public class MenuJuego extends JFrame {
                     "Retirarse", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
             if (opcion == JOptionPane.YES_OPTION) {
+                if (tablero.getTurno() == Bando.HEROES) {
+                    terminarPartida(Bando.VILLANOS, Motivo.RETIRO);
+                }
+                else {
+                    terminarPartida(Bando.HEROES, Motivo.RETIRO);
+                }
                 dispose();
             }
         });
@@ -234,6 +240,11 @@ public class MenuJuego extends JFrame {
     public void clickCasilla(int fila, int columna) {
         if (tablero.esMovimientoValido(fila, columna)) {
             tablero.mover(fila, columna);
+        }
+        if (tablero.getGanador() != null) {
+            actualizarTablero();
+            terminarPartida(tablero.getGanador(), Motivo.TIERRA);
+            return;
         }
         else {
             tablero.seleccionar(fila, columna);
