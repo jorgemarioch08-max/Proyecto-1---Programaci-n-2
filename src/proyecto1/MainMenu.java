@@ -104,7 +104,7 @@ public class MainMenu extends JFrame {
         });
     }
 
-    private void nuevaPartida() throws NoAccountLoggedException {
+    private void nuevaPartida() {
         Player activo = admin.getActivePlayer();
         Player[] players = admin.getPlayers();
 
