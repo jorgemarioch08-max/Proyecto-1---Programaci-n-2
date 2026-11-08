@@ -3,6 +3,7 @@ package proyecto1;
 import javax.swing.*;
 import java.awt.*;
 import Exceptions.*;
+import enums.*;
 
 public class MainMenu extends JFrame {
 
@@ -152,5 +153,4 @@ public class MainMenu extends JFrame {
             new MenuJuego(new Tablero(), rival, activo).setVisible(true);
         }
     }
-
 }

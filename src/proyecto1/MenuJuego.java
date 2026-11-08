@@ -1,7 +1,12 @@
 package proyecto1;
 
+import enums.Bando;
+import enums.Motivo;
+
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class MenuJuego extends JFrame {
 
@@ -232,6 +237,61 @@ public class MenuJuego extends JFrame {
         }
         else {
             tablero.seleccionar(fila, columna);
+        }
+    }
+
+    public void terminarPartida(Bando bandoGanador, Motivo motivo) {
+        Player ganador;
+        Player perdedor;
+        String bandoG;
+        String bandoP;
+        String fecha;
+        String mensaje="";
+
+        if (bandoGanador == Bando.HEROES) {
+            ganador = jugadorHeroes;
+            perdedor = jugadorVillanos;
+            bandoG = "HÉROES";
+            bandoP = "VILLANOS";
+        }
+        else {
+            ganador = jugadorVillanos;
+            perdedor = jugadorHeroes;
+            bandoG = "VILLANOS";
+            bandoP = "HÉROES";
+        }
+
+        fecha = LocalDate.now().toString();
+
+        switch (motivo) {
+            case TIERRA:
+                if (bandoGanador == Bando.HEROES) {
+                    mensaje = ganador.username+" del bando "+" ha SALVADO LA TIERRA! Venciendo a "+perdedor.username+" - "+fecha;
+                }
+                else {
+                    mensaje = ganador.username+" del bando "+bandoG+" ha CAPTURADO LA TIERRA! Venciendo a "+perdedor.username+" - "+fecha;
+                }
+                ganador.puntos+=10;
+                perdedor.puntos-=5;
+                break;
+            case SIN_MOVIMIENTOS:
+                mensaje = perdedor.username+" del bando "+bandoP+" ha perdido por no tener movimientos válidos disponibles ante "+ganador.username+" - "+fecha;
+                ganador.puntos+=10;
+                perdedor.puntos-=5;
+                break;
+            case RETIRO:
+                mensaje = ganador.username+" del bando "+bandoG+" ha ganado porque "+perdedor.username+" del bando "+bandoP+" se ha retirado de la partida. "+fecha;
+                ganador.puntos+=3;
+                break;
+        }
+
+        jugadorHeroes.partidasHeroes++;
+        jugadorHeroes.partidasTotales++;
+        jugadorVillanos.partidasVillanos++;
+        jugadorVillanos.partidasTotales++;
+
+        if (motivo != Motivo.RETIRO) {
+            new FinPartida(this, mensaje, ganador, bandoGanador, jugadorHeroes, jugadorVillanos).setVisible(true);
         }
     }
 

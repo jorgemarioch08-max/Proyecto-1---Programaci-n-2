@@ -1,4 +1,4 @@
-package proyecto1;
+package enums;
 
 public enum Bando {
     HEROES,

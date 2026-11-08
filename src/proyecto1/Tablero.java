@@ -1,5 +1,8 @@
 package proyecto1;
 
+import enums.Bando;
+import enums.Resultado;
+
 import java.util.Random;
 
 public class Tablero {

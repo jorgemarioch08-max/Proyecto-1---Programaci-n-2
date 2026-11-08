@@ -1,5 +1,7 @@
 package proyecto1;
 
+import enums.Bando;
+
 import javax.swing.*;
 
 public class Ficha implements Pieza, Movible {
