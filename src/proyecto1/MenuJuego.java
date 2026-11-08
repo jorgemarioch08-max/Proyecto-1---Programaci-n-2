@@ -186,15 +186,11 @@ public class MenuJuego extends JFrame {
 
     public void clickCasilla(int fila, int columna) {
         if (tablero.esMovimientoValido(fila, columna)) {
-            if (tablero.esMovimientoValido(fila, columna)) {
-                tablero.mover(fila, columna);
-            }
+            tablero.mover(fila, columna);
         }
         else {
             tablero.seleccionar(fila, columna);
         }
-
-        actualizarTablero();
     }
 
 }

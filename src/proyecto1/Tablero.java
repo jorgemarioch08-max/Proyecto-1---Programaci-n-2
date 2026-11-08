@@ -222,6 +222,11 @@ public class Tablero {
 
         int distancia = Math.abs(fila - seleccionada.getFila()) +  Math.abs(columna - seleccionada.getColumna());
 
+        if (((Movible) seleccionada.getPieza()).getRango() == 2) {
+            boolean enLinea = (fila == seleccionada.getFila() || columna == seleccionada.getColumna());
+            return enLinea && distancia >= 1 && freeWay(seleccionada.getFila(), seleccionada.getColumna(), fila, columna);
+        }
+
         return distancia == 1;
     }
 
@@ -259,6 +264,11 @@ public class Tablero {
         Casilla destino = casillas[fila][columna];
         Pieza atacante = seleccionada.getPieza();
         Pieza defensor = destino.getPieza();
+
+        int distancia = Math.abs(fila - seleccionada.getFila()) + Math.abs(columna - seleccionada.getColumna());
+        if (distancia > 1) {
+            atacante.revelar();
+        }
 
         if (defensor == null) {
             destino.setPieza(atacante);
@@ -302,6 +312,30 @@ public class Tablero {
             villanosVencidos[contVillanosV] = pieza;
             contVillanosV++;
         }
+    }
+
+    private boolean freeWay(int fila, int columna, int filaDestino, int columnaDestino) {
+        if (fila < filaDestino) {
+            fila++;
+        }
+        else if (fila > filaDestino) {
+            fila--;
+        }
+
+        if (columna < columnaDestino) {
+            columna++;
+        }
+        else if (columna > columnaDestino) {
+            columna--;
+        }
+
+        if (fila == filaDestino && columna == columnaDestino) {
+            return true;
+        }
+        if (!casillas[fila][columna].isEmpty() || casillas[fila][columna].isProhibida()) {
+            return false;
+        }
+        return freeWay(fila, columna, filaDestino, columnaDestino);
     }
 
 
