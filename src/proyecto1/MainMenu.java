@@ -80,7 +80,11 @@ public class MainMenu extends JFrame {
 
         //Botones
         partidaNueva.addActionListener(e -> {
-            nuevaPartida();
+            try {
+                nuevaPartida();
+            } catch (NoAccountLoggedException ex) {
+                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         });
 
         perfil.addActionListener(e ->{
@@ -104,7 +108,8 @@ public class MainMenu extends JFrame {
         });
     }
 
-    private void nuevaPartida() {
+    private void nuevaPartida() throws NoAccountLoggedException {
+        admin.checkActivePlayer();
         Player activo = admin.getActivePlayer();
         Player[] players = admin.getPlayers();
 
