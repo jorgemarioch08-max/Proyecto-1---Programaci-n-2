@@ -240,11 +240,11 @@ public class MenuJuego extends JFrame {
     public void clickCasilla(int fila, int columna) {
         if (tablero.esMovimientoValido(fila, columna)) {
             tablero.mover(fila, columna);
-        }
-        if (tablero.getGanador() != null) {
-            actualizarTablero();
-            terminarPartida(tablero.getGanador(), Motivo.TIERRA);
-            return;
+            if (tablero.getGanador() != null) {
+                actualizarTablero();
+                terminarPartida(tablero.getGanador(), Motivo.TIERRA);
+                return;
+            }
         }
         else {
             tablero.seleccionar(fila, columna);
@@ -277,7 +277,7 @@ public class MenuJuego extends JFrame {
         switch (motivo) {
             case TIERRA:
                 if (bandoGanador == Bando.HEROES) {
-                    mensaje = ganador.username+" del bando "+" ha SALVADO LA TIERRA! Venciendo a "+perdedor.username+" - "+fecha;
+                    mensaje = ganador.username+" del bando "+bandoG+" ha SALVADO LA TIERRA! Venciendo a "+perdedor.username+" - "+fecha;
                 }
                 else {
                     mensaje = ganador.username+" del bando "+bandoG+" ha CAPTURADO LA TIERRA! Venciendo a "+perdedor.username+" - "+fecha;
@@ -301,10 +301,11 @@ public class MenuJuego extends JFrame {
         jugadorVillanos.partidasVillanos++;
         jugadorVillanos.partidasTotales++;
 
-        if (motivo != Motivo.RETIRO) {
-            new FinPartida(this, mensaje, ganador, bandoGanador, jugadorHeroes, jugadorVillanos).setVisible(true);
+        if (motivo == Motivo.RETIRO) {
+            new FinPartida(this, mensaje, ganador, bandoGanador, jugadorHeroes, jugadorVillanos);
         }
     }
+
 
 }
 
