@@ -23,6 +23,7 @@ public class MainMenu extends JFrame {
     public PlayerManager admin;
 
     public MainMenu(PlayerManager admin) {
+        this.admin = admin;
         verPerfil = new MiPerfil(admin, this);
 
         //GUI
@@ -79,7 +80,7 @@ public class MainMenu extends JFrame {
 
         //Botones
         partidaNueva.addActionListener(e -> {
-            new MenuJuego(new Tablero()).setVisible(true);
+            nuevaPartida();
         });
 
         perfil.addActionListener(e ->{
@@ -103,6 +104,48 @@ public class MainMenu extends JFrame {
         });
     }
 
+    private void nuevaPartida() throws NoAccountLoggedException {
+        Player activo = admin.getActivePlayer();
+        Player[] players = admin.getPlayers();
 
+        int cont = 0;
+        for (int i = 0; i < players.length; i++) {
+            if (players[i] != null && players[i] != activo) {
+                cont++;
+            }
+        }
+        if (cont == 0) {
+            JOptionPane.showMessageDialog(this, "Se necesita al menos otro jugador registrado para jugar.", "No disponible", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String[] nombres = new String[cont];
+        int j = 0;
+        for (int i = 0; i < players.length; i++) {
+            if (players[i] != null && players[i] != activo) {
+                nombres[j] = players[i].username;
+                j++;
+            }
+        }
+
+        String nombreRival = (String) JOptionPane.showInputDialog(this, "Elige a tu rival:", "Partida Nueva", JOptionPane.QUESTION_MESSAGE, null, nombres, nombres[0]);
+        if (nombreRival == null) {
+            return;
+        }
+        Player rival = admin.findPlayer(nombreRival);
+
+        String[] bandos = {"Héroes", "Villanos"};
+        int opcion = JOptionPane.showOptionDialog(this, "Elige tu bando:", "Partida Nueva", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, bandos, bandos[0]);
+        if (opcion == -1) {
+            return;
+        }
+
+        if (opcion == 0) {
+            new MenuJuego(new Tablero(), activo, rival).setVisible(true);
+        }
+        else {
+            new MenuJuego(new Tablero(), rival, activo).setVisible(true);
+        }
+    }
 
 }

@@ -18,8 +18,13 @@ public class MenuJuego extends JFrame {
 
     JButton retiro = new JButton("RETIRARSE");
 
-    public MenuJuego(Tablero tablero) {
+    Player jugadorHeroes;
+    Player jugadorVillanos;
+
+    public MenuJuego(Tablero tablero, Player jugadorHeroes, Player jugadorVillanos) {
         this.tablero = tablero;
+        this.jugadorHeroes = jugadorHeroes;
+        this.jugadorVillanos = jugadorVillanos;
         botones = new JButton[10][10];
 
         setTitle("Marvel Heroes: Stratego");
@@ -94,8 +99,25 @@ public class MenuJuego extends JFrame {
         add(zonaTablero, BorderLayout.CENTER);
         add(panelLateral, BorderLayout.EAST);
 
-        actualizarTablero();
+        retiro.addActionListener(e -> {
+            String nombre;
+            if (tablero.getTurno() == Bando.HEROES) {
+                nombre = jugadorHeroes.username;
+            }
+            else {
+                nombre = jugadorVillanos.username;
+            }
 
+            int opcion = JOptionPane.showConfirmDialog(this,
+                    nombre + ", ¿seguro que quieres retirarte?\nLa partida se dará por terminada y tu rival ganará 3 puntos en el ranking.",
+                    "Retirarse", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                dispose();
+            }
+        });
+
+        actualizarTablero();
     }
 
     public void crearBotones(){
@@ -181,7 +203,27 @@ public class MenuJuego extends JFrame {
             }
         }
 
-        lblTurno.setText("Turno de: "+tablero.getTurno());
+        if (tablero.getTurno() == Bando.HEROES) {
+            lblTurno.setText("Turno de: " + jugadorHeroes.username + " (HÉROES)");
+        }
+        else {
+            lblTurno.setText("Turno de: " + jugadorVillanos.username + " (VILLANOS)");
+        }
+
+        mostrarVencidos(heroesVPanel, tablero.getHeroesVencidos(), tablero.getContHeroesV());
+        mostrarVencidos(villanosVPanel, tablero.getVillanosVencidos(), tablero.getContVillanosV());
+    }
+
+    private void mostrarVencidos(JPanel panel, Pieza[] vencidos, int cont) {
+        panel.removeAll();
+
+        for (int i = 0; i < cont; i++) {
+            Image img = vencidos[i].getImagen().getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH);
+            panel.add(new JLabel(new ImageIcon(img)));
+        }
+
+        panel.revalidate();
+        panel.repaint();
     }
 
     public void clickCasilla(int fila, int columna) {
