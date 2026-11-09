@@ -341,6 +341,38 @@ public class Tablero {
         return freeWay(fila, columna, filaDestino, columnaDestino);
     }
 
+    public boolean tieneMovimientos(Bando bandom, int pos) {
+        if (pos == 100) {
+            return false;
+        }
 
+        int fila=pos/10;
+        int columna=pos%10;
+        Pieza pieza = casillas[fila][columna].getPieza();
+
+        if (pieza != null && pieza.getBando() == bandom && pieza instanceof Movible && puedeMoverse(fila, columna)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean puedeMoverse(int fila, int columna) {
+        Pieza pieza = casillas[fila][columna].getPieza();
+        int[] df = {-1, 1, 0, 0};
+        int[] dc = {0, 0, -1, 1};
+
+        for (int i = 0; i < 4; i++) {
+            int f = fila - df[i];
+            int c = columna - dc[i];
+
+            if (dentroDelTablero(f, c)) {
+                Casilla ady =  casillas[f][c];
+                if (!ady.isProhibida() && (ady.isEmpty() || ady.getPieza().getBando() != pieza.getBando())) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }

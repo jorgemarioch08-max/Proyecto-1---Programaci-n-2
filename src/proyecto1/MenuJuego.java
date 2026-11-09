@@ -245,6 +245,15 @@ public class MenuJuego extends JFrame {
                 terminarPartida(tablero.getGanador(), Motivo.TIERRA);
                 return;
             }
+            if (!tablero.tieneMovimientos(tablero.getTurno(), 0)) {
+                actualizarTablero();
+                if (tablero.getTurno() == Bando.HEROES) {
+                    terminarPartida(Bando.VILLANOS, Motivo.SIN_MOVIMIENTOS);
+                }
+                else {
+                    terminarPartida(Bando.HEROES, Motivo.SIN_MOVIMIENTOS);
+                }
+            }
         }
         else {
             tablero.seleccionar(fila, columna);
@@ -301,8 +310,8 @@ public class MenuJuego extends JFrame {
         jugadorVillanos.partidasVillanos++;
         jugadorVillanos.partidasTotales++;
 
-        if (motivo == Motivo.RETIRO) {
-            new FinPartida(this, mensaje, ganador, bandoGanador, jugadorHeroes, jugadorVillanos);
+        if (motivo != Motivo.RETIRO) {
+            new FinPartida(this, mensaje, ganador, bandoGanador, jugadorHeroes, jugadorVillanos).setVisible(true);
         }
     }
 

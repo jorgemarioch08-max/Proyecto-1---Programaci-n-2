@@ -20,7 +20,7 @@ public class MenuInicial extends JFrame  {
 
     public MenuInicial(PlayerManager admin) {
         setTitle("Ingresar");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(800,500);
         setResizable(false);
         setLayout(new BorderLayout(10, 10));

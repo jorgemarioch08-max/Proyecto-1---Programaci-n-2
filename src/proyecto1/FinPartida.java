@@ -97,8 +97,6 @@ public class FinPartida extends JDialog {
         salir.addActionListener(e -> {
             System.exit(0);
         });
-
-        setVisible(true);
     }
 
 }

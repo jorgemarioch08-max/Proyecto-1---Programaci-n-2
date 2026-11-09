@@ -41,7 +41,4 @@ public class Casilla {
     public int getColumna() {
         return columna;
     }
-
-
-
 }

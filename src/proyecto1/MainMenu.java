@@ -29,7 +29,7 @@ public class MainMenu extends JFrame {
 
         //GUI
         setTitle("Marvel Heroes: Stratego");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(1600,900);
         setResizable(false);
         setLayout(new BorderLayout(10, 10));
