@@ -101,7 +101,7 @@ public class MainMenu extends JFrame {
         });
 
         universo.addActionListener(e ->{
-            JOptionPane.showMessageDialog(this, "Función en construccion...", "No disponible", JOptionPane.WARNING_MESSAGE);
+            new UniversoMarvel(admin).setVisible(true);
         });
 
         exit.addActionListener(e ->{

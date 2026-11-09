@@ -120,7 +120,47 @@ public class PlayerManager {
         }
     }
 
+    public int contarActivos() {
+        int contador = 0;
+        for (int i = 0; i < players.length; i++) {
+            if (players[i] != null) {
+                contador++;
+            }
+        }
+        return contador;
+    }
 
+    public Player[] getRanking() {
+        Player[] ranking = new Player[contarActivos()];
+        int j = 0;
+        for (int i = 0; i < players.length; i++) {
+            if (players[i] != null) {
+                ranking[j] = players[i];
+                j++;
+            }
+        }
+
+        for (int i = 0; i < ranking.length-1; i++) {
+            for (int k = 0; k < ranking.length-1-i; k++) {
+                if (ranking[k].puntos < ranking[k+1].puntos) {
+                    Player temp = ranking[k];
+                    ranking[k] = ranking[k+1];
+                    ranking[k+1] = temp;
+                }
+            }
+        }
+        return ranking;
+    }
+
+    public int contarVictorias(Bando bando, int i) {
+        if (i == contPartidas) {
+            return 0;
+        }
+        if (ganadores[i] == bando) {
+            return 1 + contarVictorias(bando, i+1);
+        }
+        return contarVictorias(bando, i+1);
+    }
 
     //Getters
     public Player[] getPlayers() {

@@ -51,6 +51,7 @@ public class MiPerfil extends JDialog {
         userNamme.setForeground(Color.white);
         lbl3.setForeground(Color.white);
         lbl4.setForeground(Color.white);
+        lblPuntos.setForeground(Color.white);
         lbl5.setForeground(Color.white);
         lbl6.setForeground(Color.white);
         lbl7.setForeground(Color.white);
