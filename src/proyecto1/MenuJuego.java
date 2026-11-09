@@ -320,6 +320,7 @@ public class MenuJuego extends JFrame {
 
         if (motivo != Motivo.RETIRO) {
             new FinPartida(this, mensaje, ganador, bandoGanador, jugadorHeroes, jugadorVillanos).setVisible(true);
+            dispose();
         }
     }
 
