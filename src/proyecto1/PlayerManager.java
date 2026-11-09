@@ -20,7 +20,7 @@ public class PlayerManager {
         this.activePlayer = null;
     }
 
-    public void createPlayer(String nombre, String contra) throws InvalidPasswordException, InvalidUsernameException, DuplicatedUserException {
+    public void createPlayer(String nombre, String contra) throws InvalidPasswordException, InvalidUsernameException, DuplicatedUserException, PlayerLimitException {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new InvalidUsernameException();
         }
@@ -34,9 +34,10 @@ public class PlayerManager {
             if (players[i] == null) {
                 players[i] = new Player(nombre.trim(), contra, 0, 0, 0, false);
                 usuariosHistoricos++;
-                break;
+                return;
             }
         }
+        throw new PlayerLimitException();
     }
 
     public void loginPlayer(String findUser, String password) throws IncorrectUsernameException, IncorrectPasswordException {

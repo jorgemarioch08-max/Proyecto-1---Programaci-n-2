@@ -165,17 +165,19 @@ public class MiPerfil extends JDialog {
         });
 
         cerrarSesion.addActionListener(e ->{
-            try {
-                admin.logoutPlayer();
-                mainMenu.dispose();
-                MenuInicial inicial = new MenuInicial(admin);
-                inicial.setVisible(true);
-                dispose();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            int opcion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que quieres cerrar sesión?", "Cerrar sesión", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+            if (opcion == JOptionPane.YES_OPTION) {
+                try {
+                    admin.logoutPlayer();
+                    JOptionPane.showMessageDialog(this, "Has cerrado sesión con éxito.\nPara poder jugar debes iniciar sesión o crear una nueva cuenta.", "Sesión cerrada", JOptionPane.INFORMATION_MESSAGE);
+                    mainMenu.dispose();
+                    new MenuInicial(admin).setVisible(true);
+                    dispose();
+                } catch (NoAccountLoggedException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
-            JOptionPane.showMessageDialog(this, "Has cerrado sesión con exito." +
-                    "\nPara poder jugar deber iniciar sesión o crear una nueva cuenta", "Sesión Cerrada", JOptionPane.INFORMATION_MESSAGE);
         });
 
         deleteAcc.addActionListener(e -> {

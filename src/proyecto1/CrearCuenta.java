@@ -135,7 +135,7 @@ public class CrearCuenta extends JDialog {
             try {
                 admin.createPlayer(user.getText(), new String(pass.getPassword()));
                 dispose();
-            } catch (Exception ex) {
+            } catch (InvalidUsernameException | DuplicatedUserException | InvalidPasswordException | PlayerLimitException ex) {
                 JOptionPane.showMessageDialog(null,ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
             }
         });
