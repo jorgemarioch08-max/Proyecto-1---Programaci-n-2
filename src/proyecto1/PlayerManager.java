@@ -1,7 +1,7 @@
 package proyecto1;
 
 import Exceptions.*;
-
+import enums.Bando;
 import javax.swing.*;
 
 public class PlayerManager {
@@ -10,6 +10,9 @@ public class PlayerManager {
     public int playerLimit;
     private Player activePlayer;
 
+    private Bando[] ganadores = new  Bando[100];
+    private int contPartidas = 0;
+    private int usuariosHistoricos = 0;
 
     public PlayerManager(int playerLimit) {
         this.playerLimit = playerLimit;
@@ -29,8 +32,8 @@ public class PlayerManager {
         }
         for (int i = 0; i < players.length; i++) {
             if (players[i] == null) {
-                players[i] = new Player(nombre.trim(), contra, 0, 0, 0, false
-                );
+                players[i] = new Player(nombre.trim(), contra, 0, 0, 0, false);
+                usuariosHistoricos++;
                 break;
             }
         }
@@ -110,6 +113,15 @@ public class PlayerManager {
         return true;
     }
 
+    public void registrarPartida(Bando ganador) {
+        if (contPartidas < ganadores.length) {
+            ganadores[contPartidas] = ganador;
+            contPartidas++;
+        }
+    }
+
+
+
     //Getters
     public Player[] getPlayers() {
         return players;
@@ -119,6 +131,15 @@ public class PlayerManager {
     }
     public Player getActivePlayer() {
         return activePlayer;
+    }
+    public Bando[] getGanadores() {
+        return ganadores;
+    }
+    public int getContPartidas() {
+        return contPartidas;
+    }
+    public int getUsuariosHistoricos() {
+        return usuariosHistoricos;
     }
 
     //Setters

@@ -26,11 +26,15 @@ public class MenuJuego extends JFrame {
     Player jugadorHeroes;
     Player jugadorVillanos;
 
+    //Admin
+    PlayerManager admin;
+
     public MenuJuego(Tablero tablero, Player jugadorHeroes, Player jugadorVillanos) {
         this.tablero = tablero;
         this.jugadorHeroes = jugadorHeroes;
         this.jugadorVillanos = jugadorVillanos;
         botones = new JButton[10][10];
+        this.admin = admin;
 
         setTitle("Marvel Heroes: Stratego");
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -310,11 +314,18 @@ public class MenuJuego extends JFrame {
         jugadorVillanos.partidasVillanos++;
         jugadorVillanos.partidasTotales++;
 
+        ganador.addLog(mensaje);
+        perdedor.addLog(mensaje);
+        admin.registrarPartida(bandoGanador);
+
         if (motivo != Motivo.RETIRO) {
             new FinPartida(this, mensaje, ganador, bandoGanador, jugadorHeroes, jugadorVillanos).setVisible(true);
         }
     }
 
-
+    //Getters
+    public PlayerManager getAdmin() {
+        return admin;
+    }
 }
 

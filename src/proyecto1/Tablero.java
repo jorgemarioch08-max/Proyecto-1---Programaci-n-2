@@ -341,7 +341,7 @@ public class Tablero {
         return freeWay(fila, columna, filaDestino, columnaDestino);
     }
 
-    public boolean tieneMovimientos(Bando bandom, int pos) {
+    public boolean tieneMovimientos(Bando bando, int pos) {
         if (pos == 100) {
             return false;
         }
@@ -350,13 +350,13 @@ public class Tablero {
         int columna=pos%10;
         Pieza pieza = casillas[fila][columna].getPieza();
 
-        if (pieza != null && pieza.getBando() == bandom && pieza instanceof Movible && puedeMoverse(fila, columna)) {
+        if (pieza != null && pieza.getBando() == bando && pieza instanceof Movible && puedeMoverse(fila, columna)) {
             return true;
         }
-        return false;
+        return tieneMovimientos(bando, pos +1);
     }
 
-    public boolean puedeMoverse(int fila, int columna) {
+    private boolean puedeMoverse(int fila, int columna) {
         Pieza pieza = casillas[fila][columna].getPieza();
         int[] df = {-1, 1, 0, 0};
         int[] dc = {0, 0, -1, 1};

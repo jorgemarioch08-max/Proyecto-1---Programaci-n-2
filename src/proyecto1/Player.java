@@ -10,6 +10,9 @@ public class Player {
     public int partidasTotales;
     public boolean login;
 
+    public String[] logs = new String[100];
+    public int contLogs = 0;
+
     public Player(String username, String password, int puntos, int partidasHeroes, int partidasVillanos, boolean login) {
         this.username = username;
         this.password = password;
@@ -26,5 +29,16 @@ public class Player {
 
     public void changePassword(String newPassword) {
         this.password = newPassword;
+    }
+
+    public void addLog(String log) {
+        if (contLogs == logs.length) {
+            for (int i = 0; i < logs.length - 1; i++) {
+                logs[i] = logs[i + 1];
+            }
+            contLogs--;
+        }
+        logs[contLogs] = log;
+        contLogs++;
     }
 }
