@@ -12,15 +12,21 @@ public class MiPerfil extends JDialog {
     MainMenu mainMenu;
 
     JPanel panel1 = new JPanel();
+    JPanel panelHistorial = new JPanel();
+
+    JTextArea historial = new JTextArea();
+    JScrollPane scroll = new JScrollPane(historial);
 
     JLabel lbl1 = new JLabel("Perfil");
     JLabel lbl2 = new JLabel("Nombre de usuario: ");
     JLabel userNamme = new JLabel();
     JLabel lbl3 = new JLabel("Sesión activa.");
     JLabel lbl4 = new JLabel("Estadisticas");
+    JLabel lblPuntos = new JLabel();
     JLabel lbl5 = new JLabel();
     JLabel lbl6 = new JLabel();
     JLabel lbl7 = new JLabel();
+    JLabel lblHistorial = new JLabel("Historial de Partidas");
 
     ImageIcon icon = new ImageIcon("src/Imagenes/perfil.png");
 
@@ -35,10 +41,10 @@ public class MiPerfil extends JDialog {
         this.mainMenu = mainMenu;
 
         setTitle("Mi Perfil");
-        setSize(400, 700);
+        setSize(1000, 700);
         setResizable(false);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-        setLayout(new BorderLayout(10, 10));
+        setLayout(new BorderLayout(0, 10));
 
         lbl1.setForeground(Color.white);
         lbl2.setForeground(Color.white);
@@ -65,6 +71,7 @@ public class MiPerfil extends JDialog {
         userNamme.setFont(new Font("Arial", Font.BOLD, 25));
         lbl3.setFont(new Font("Arial", Font.PLAIN, 18));
         lbl4.setFont(new Font("Arial", Font.BOLD, 20));
+        lblPuntos.setFont(new Font("Arial", Font.PLAIN, 18));
         lbl5.setFont(new Font("Arial", Font.PLAIN, 18));
         lbl6.setFont(new Font("Arial", Font.PLAIN, 18));
         lbl7.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -101,6 +108,9 @@ public class MiPerfil extends JDialog {
         panel1.add(lbl4);
         lbl4.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(15));
+        panel1.add(lblPuntos);
+        lblPuntos.setAlignmentX(Component.LEFT_ALIGNMENT);
+        panel1.add(Box.createVerticalStrut(8));
         panel1.add(lbl5);
         lbl5.setAlignmentX(Component.LEFT_ALIGNMENT);
         panel1.add(Box.createVerticalStrut(8));
@@ -196,15 +206,47 @@ public class MiPerfil extends JDialog {
             }
         });
 
-        add(panel1, BorderLayout.CENTER);
+        //Historial
+        lblHistorial.setFont(new Font("Arial", Font.BOLD, 20));
+        lblHistorial.setForeground(Color.white);
+
+        historial.setEditable(false);
+        historial.setLineWrap(true);
+        historial.setWrapStyleWord(true);
+        historial.setFont(new Font("Arial", Font.PLAIN, 16));
+        historial.setBackground(Color.decode("#444444"));
+        historial.setForeground(Color.white);
+        historial.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        scroll.setBorder(null);
+
+        panelHistorial.setLayout(new BorderLayout(0, 15));
+        panelHistorial.setBackground(Color.decode("#333333"));
+        panelHistorial.setBorder(BorderFactory.createEmptyBorder(40, 20, 40, 40));
+        panelHistorial.add(lblHistorial, BorderLayout.NORTH);
+        panelHistorial.add(scroll, BorderLayout.CENTER);
+
+        add(panel1, BorderLayout.WEST);
+        add(panelHistorial, BorderLayout.CENTER);
     }
 
     public void actualizarDatos() {
         Player lclplayer = admin.getActivePlayer();
 
         userNamme.setText(lclplayer.username);
+        lblPuntos.setText("Puntos: "+lclplayer.puntos);
         lbl5.setText("Partidas jugadas: " + lclplayer.partidasTotales);
         lbl6.setText("Partidas jugadas como héroe: " + lclplayer.partidasHeroes);
         lbl7.setText("Partidas jugadas como villano: " + lclplayer.partidasVillanos);
+
+        String txt = "";
+        for (int i = lclplayer.contLogs-1; i >= 0; i--) {
+            txt+=lclplayer.logs[i] + "\n";
+        }
+        if (lclplayer.contLogs == 0) {
+            txt = "Todavía no se ha jugado ninguna partida.";
+        }
+        historial.setText(txt);
+        historial.setCaretPosition(0);
     }
 }

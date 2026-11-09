@@ -147,10 +147,10 @@ public class MainMenu extends JFrame {
         }
 
         if (opcion == 0) {
-            new MenuJuego(new Tablero(), activo, rival).setVisible(true);
+            new MenuJuego(new Tablero(), activo, rival, admin).setVisible(true);
         }
         else {
-            new MenuJuego(new Tablero(), rival, activo).setVisible(true);
+            new MenuJuego(new Tablero(), rival, activo, admin).setVisible(true);
         }
     }
 }

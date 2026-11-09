@@ -86,7 +86,7 @@ public class FinPartida extends JDialog {
         reiniciar.addActionListener(e -> {
             dispose();
             juego.dispose();
-            new MenuJuego(new Tablero(), jugadorH, jugadorV).setVisible(true);
+            new MenuJuego(new Tablero(), jugadorH, jugadorV, juego.getAdmin()).setVisible(true);
         });
 
         menu.addActionListener(e -> {

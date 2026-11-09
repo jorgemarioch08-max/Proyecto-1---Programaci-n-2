@@ -10,7 +10,7 @@ public class PlayerManager {
     public int playerLimit;
     private Player activePlayer;
 
-    private Bando[] ganadores = new  Bando[100];
+    private Bando[] ganadores = new  Bando[1000];
     private int contPartidas = 0;
     private int usuariosHistoricos = 0;
 

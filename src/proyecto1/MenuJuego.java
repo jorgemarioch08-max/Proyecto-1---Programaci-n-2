@@ -29,7 +29,7 @@ public class MenuJuego extends JFrame {
     //Admin
     PlayerManager admin;
 
-    public MenuJuego(Tablero tablero, Player jugadorHeroes, Player jugadorVillanos) {
+    public MenuJuego(Tablero tablero, Player jugadorHeroes, Player jugadorVillanos, PlayerManager admin) {
         this.tablero = tablero;
         this.jugadorHeroes = jugadorHeroes;
         this.jugadorVillanos = jugadorVillanos;
